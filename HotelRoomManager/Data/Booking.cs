@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelRoomManager.Models
+namespace HotelRoomManager.Data
 {
     public class Booking
     {
-        public Customer Customer { get; set; }
-        public Room Room { get; set; }
+
+        public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool IsSpecialRequest { get; set; }
-        public int AmountOfExtraBeds  { get; set; }
-
+        public Customer Customer { get; set; }
+        public Room Room { get; set; }
 
 
 

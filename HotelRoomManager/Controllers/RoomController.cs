@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using HotelRoomManager.Models;
+using HotelRoomManager.Data;
 
 namespace HotelRoomManager.Controllers
 {

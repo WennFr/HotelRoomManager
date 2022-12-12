@@ -5,24 +5,19 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelRoomManager.Models
+namespace HotelRoomManager.Data
 {
     public class Room
     {
-        public string RoomName { get; set; }
+        public int Id { get; set; }
 
         public string Floor { get; set; }
 
-        public RoomType RoomType { get; set; }
+        public string Type { get; set; }
 
-
-
-    }
-    public enum RoomType
-    {
-        Single,
-        Double
+        public int Size { get; set; }
 
     }
+    
 
 }

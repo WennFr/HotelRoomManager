@@ -19,9 +19,13 @@ namespace HotelRoomManager.Data
         public string Floor { get; set; }
         [MaxLength(50)]
         public string Type { get; set; }
+
+       // public RoomType Type { get; set; }
+
         public int Size { get; set; }
-        public ExtraBed ExtraBed { get; set; }
-        public ICollection<Booking> Booking { get; set; }
+        public int ExtraBedId { get; set; }
+
+        
 
        
 

@@ -11,8 +11,8 @@ namespace HotelRoomManager.Data
     {
         [Key]
         public int Id { get; set; }
-
         public int AllowedAmountOfExtraBeds{ get; set; }
+        public ICollection<Room> Room { get; set; }
 
 
     }

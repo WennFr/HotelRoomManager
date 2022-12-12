@@ -4,6 +4,7 @@ using HotelRoomManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelRoomManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212132924_Changes to class properties and relationships")]
+    partial class Changestoclasspropertiesandrelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,8 +132,6 @@ namespace HotelRoomManager.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExtraBedId");
-
                     b.ToTable("Room");
                 });
 
@@ -178,20 +179,6 @@ namespace HotelRoomManager.Migrations
                         .HasForeignKey("SalutationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HotelRoomManager.Data.Room", b =>
-                {
-                    b.HasOne("HotelRoomManager.Data.ExtraBed", null)
-                        .WithMany("Room")
-                        .HasForeignKey("ExtraBedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HotelRoomManager.Data.ExtraBed", b =>
-                {
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("HotelRoomManager.Data.Salutation", b =>

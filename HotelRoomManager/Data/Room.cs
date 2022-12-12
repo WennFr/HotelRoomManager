@@ -20,14 +20,13 @@ namespace HotelRoomManager.Data
         [MaxLength(50)]
         public string Type { get; set; }
 
-       // public RoomType Type { get; set; }
-
+        // public RoomType Type { get; set; }
         public int Size { get; set; }
         public int ExtraBedId { get; set; }
 
-        
 
-       
+
+
 
         public enum RoomType
         {
@@ -41,6 +40,6 @@ namespace HotelRoomManager.Data
 
 
     }
-    
+
 
 }

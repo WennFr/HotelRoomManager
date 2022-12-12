@@ -19,7 +19,6 @@ namespace HotelRoomManager.Data
         public string? Address { get; set; }
         [MaxLength(30)]
         public string? Phone { get; set; }
-        // public Salutation Salutation { get; set; }
         public int SalutationId { get; set; }
        
 

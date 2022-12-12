@@ -10,9 +10,18 @@ namespace HotelRoomManager
 {
     public class Application
     {
+
+        public Application()
+        {
+            
+
+
+
+        }
+
+
         public void Run()
         {
-
             Menu.MainMenu();
         }
 

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using HotelRoomManager.Controllers;
+using HotelRoomManager.Data;
 
 namespace HotelRoomManager
 {
@@ -14,8 +15,8 @@ namespace HotelRoomManager
         public Application()
         {
             
-
-
+            Builder.BuildDatabase();
+            Builder.InitializeData();
 
         }
 

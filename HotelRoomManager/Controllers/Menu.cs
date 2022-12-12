@@ -8,7 +8,7 @@ using static System.Collections.Specialized.BitVector32;
 namespace HotelRoomManager.Controllers
 {
     public class Menu
-    {
+    { 
         public static void MainMenu()
         {
             var isRunning = true;

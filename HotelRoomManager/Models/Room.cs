@@ -13,15 +13,16 @@ namespace HotelRoomManager.Models
 
         public string Floor { get; set; }
 
-        public string Type { get; set; }
-
-        public Boolean IsAvailable { get; set; }
+        public RoomType RoomType { get; set; }
 
 
-
-
-
-        
 
     }
+    public enum RoomType
+    {
+        Single,
+        Double
+
+    }
+
 }

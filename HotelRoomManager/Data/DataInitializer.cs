@@ -7,14 +7,15 @@ namespace HotelRoomManager.Data;
 
 public class DataInitializer
 {
-    private static ApplicationDbContext dbContext;
-
+    public ApplicationDbContext dbContext { get; set; }
+    public DataInitializer(ApplicationDbContext context)
+    {
+        dbContext = context;
+    }
 
     public void Migrate()
     {
-        dbContext = Builder.GetDbContext();
         dbContext.Database.Migrate();
-
     }
 
     public void Seed()
@@ -28,8 +29,6 @@ public class DataInitializer
 
         SeedBooking();
         dbContext.SaveChanges();
-
-
     }
 
     public void SeedSalutations()
@@ -106,9 +105,7 @@ public class DataInitializer
             });
 
         }
-
     }
-
     public void SeedRooms()
     {
         var roomController = new RoomController();
@@ -173,7 +170,6 @@ public class DataInitializer
         }
 
     }
-
 
     public void SeedBooking()
     {

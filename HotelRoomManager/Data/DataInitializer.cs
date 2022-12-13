@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HotelRoomManager.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelRoomManager.Data;
 
@@ -6,15 +7,21 @@ public class DataInitializer
 {
     private static ApplicationDbContext dbContext;
 
-    public void MigrateAndSeed()
+
+    public void Migrate()
     {
         dbContext = Builder.GetDbContext();
         dbContext.Database.Migrate();
+
+    }
+    public void Seed()
+    {
         SeedSalutations();
         SeedExtraBeds();
         dbContext.SaveChanges();
 
         SeedCustomers();
+        // SeedRooms();
         dbContext.SaveChanges();
 
     }
@@ -37,7 +44,6 @@ public class DataInitializer
         }
 
     }
-
     public void SeedExtraBeds()
     {
         if (!dbContext.ExtraBed.Any(e => e.AllowedAmountOfExtraBeds == 0))
@@ -93,9 +99,6 @@ public class DataInitializer
             });
 
         }
-
-
-
         if (!dbContext.Customer.Any(s => s.FirstName == "Maya" && s.LastName == "Schulz"))
         {
             dbContext.Customer.Add(new Customer()
@@ -108,8 +111,6 @@ public class DataInitializer
             });
 
         }
-
-
         if (!dbContext.Customer.Any(s => s.FirstName == "Hannah" && s.LastName == "Dahlberg"))
         {
             dbContext.Customer.Add(new Customer()
@@ -122,6 +123,71 @@ public class DataInitializer
             });
 
         }
+
+    }
+
+    public void SeedRooms()
+    {
+        var roomController = new RoomController();
+        var room = new Room();
+
+        if (!dbContext.Room.Any(r => r.Id == 1))
+        {
+            dbContext.Room.Add(new Room()
+            {
+                Floor = "1",
+                Type = "Single",
+                Size = 20,
+                ExtraBedId = 1
+            });
+
+        }
+
+        if (!dbContext.Room.Any(r => r.Id == 2))
+        {
+            dbContext.Room.Add(new Room()
+            {
+                Floor = "2",
+                Type = "Double",
+                Size = 27,
+                ExtraBedId = 2
+            });
+
+        }
+
+        if (!dbContext.Room.Any(r => r.Id == 3))
+        {
+
+            dbContext.Room.Add(new Room()
+            {
+                Floor = "2",
+                Type = "Single",
+                Size = 20,
+                ExtraBedId = 1
+            });
+
+        }
+
+        if (!dbContext.Room.Any(r => r.Id == 4))
+        {
+
+             roomController = new RoomController();
+             room = new Room()
+            {
+                Floor = "1",
+                Type = "Double",
+                Size = 35,
+            };
+
+            room.ExtraBedId = roomController.ControlExtraBedsBySize(room);
+
+            dbContext.Room.Add(room);
+
+
+        }
+
+
+
 
     }
 

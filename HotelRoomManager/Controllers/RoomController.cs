@@ -20,6 +20,25 @@ namespace HotelRoomManager.Controllers
             }
             //set{}
         }
-        
+
+
+        public int ControlExtraBedsBySize(Room room)
+        {
+
+            if (room.Type.ToLower() == "single")
+                return 1;
+
+            if (room.Size < 30)
+                return 2;
+
+            return 3;
+
+        }
+
+
+
+
+
+
     }
 }

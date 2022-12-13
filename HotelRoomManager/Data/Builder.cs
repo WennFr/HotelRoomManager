@@ -29,7 +29,8 @@ namespace HotelRoomManager.Data
             using (dbContext = new ApplicationDbContext(options.Options))
             {
                 var dataInitializer = new DataInitializer();
-                dataInitializer.MigrateAndSeed();
+                dataInitializer.Migrate();
+                dataInitializer.Seed();
 
                 //  dbContext.Database.Migrate();
             }

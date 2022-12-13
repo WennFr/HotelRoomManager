@@ -11,7 +11,6 @@ namespace HotelRoomManager.Data
     public class Builder
     {
         public static DbContextOptionsBuilder<ApplicationDbContext> options;
-        public static ApplicationDbContext dbContext;
 
 
         public static void BuildDatabase()
@@ -24,28 +23,25 @@ namespace HotelRoomManager.Data
             options.UseSqlServer(connectionString);
         }
 
-        public static void InitializeData()
+        public static ApplicationDbContext InitializeData()
         {
-            using (dbContext = new ApplicationDbContext(options.Options))
+            using (var dbContext = new ApplicationDbContext(options.Options))
             {
                 var dataInitializer = new DataInitializer(dbContext);
                 dataInitializer.Migrate();
                 dataInitializer.Seed();
 
-                //  dbContext.Database.Migrate();
+
+                var dbContextReturned = new ApplicationDbContext(options.Options);
+                return dbContextReturned;
             }
 
         }
 
-        public static DbContextOptionsBuilder<ApplicationDbContext> GetOptions()
-        {
-            return options;
-        }
-
-        public static ApplicationDbContext GetDbContext()
-        {
-            return dbContext;
-        }
+        //public static ApplicationDbContext GetDbContext()
+        //{
+        //    return dbContext = new ApplicationDbContext(options.Options);
+        //}
 
 
 

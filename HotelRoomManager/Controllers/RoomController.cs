@@ -14,6 +14,9 @@ namespace HotelRoomManager.Controllers
 
 
 
+
+
+
         public int ControlExtraBedsBySize(Room room)
         {
 

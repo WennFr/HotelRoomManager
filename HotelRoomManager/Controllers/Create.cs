@@ -1,4 +1,5 @@
 ﻿using HotelRoomManager.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,24 @@ namespace HotelRoomManager.Controllers
         {
             dbContext = context;
         }
+
+
+        public void CreateNewRoom()
+        {
+            var room = new Room();
+
+            Console.WriteLine("Kursnamn:");
+            room.Floor = Console.ReadLine();
+            room.Type = Console.ReadLine();
+
+                dbContext.Room.Add(room);
+                dbContext.SaveChanges();
+            
+
+            Console.WriteLine("Rum skapad.");
+            Console.ReadKey();
+        }
+
 
 
 

@@ -1,9 +1,16 @@
-﻿namespace HotelRoomManager.Controllers;
+﻿using HotelRoomManager.Data;
 
-public class MenuSelection
+namespace HotelRoomManager.Controllers;
+
+public static class MenuSelection
 {
     private static int selection;
     private static int selMenuLimit;
+    public static ApplicationDbContext dbContext { get; set; }
+    public static void GetDbContext(ApplicationDbContext context)
+    {
+        dbContext = context;
+    }
 
     public static bool Main()
     {
@@ -52,7 +59,7 @@ public class MenuSelection
     {
         selMenuLimit = 2;
         selection = ValidateSelection();
-
+        var create = new Create(dbContext);
         switch (selection)
         {
             case 1:

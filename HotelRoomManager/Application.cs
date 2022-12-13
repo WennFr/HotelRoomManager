@@ -11,18 +11,11 @@ namespace HotelRoomManager
 {
     public class Application
     {
-
-        public Application()
-        {
-            
-            Builder.BuildDatabase();
-            Builder.InitializeData();
-
-        }
-
-
         public void Run()
         {
+            Builder.BuildDatabase();
+            var dbContext = Builder.InitializeData();
+            MenuSelection.GetDbContext(dbContext);
             Menu.MainMenu();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelRoomManager.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +8,12 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace HotelRoomManager.Controllers
 {
-    public class Menu
-    { 
+    public static class Menu
+    {
+      
         public static void MainMenu()
         {
             var isRunning = true;
-
             while (isRunning)
             {
                 Console.Clear();
@@ -28,7 +29,6 @@ namespace HotelRoomManager.Controllers
         }
         public static void BookingMenu()
         {
-
             Console.Clear();
             Console.WriteLine($"Bokningar {Environment.NewLine}");
             Console.WriteLine("1) Boka rum");
@@ -37,7 +37,6 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("0) Gå tillbaka");
 
             MenuSelection.Booking();
-
 
         }
         public static void RegistrationMenu()
@@ -49,7 +48,6 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("0) Gå tillbaka");
 
             MenuSelection.Registration();
-
         }
 
         public static void EditMenu()

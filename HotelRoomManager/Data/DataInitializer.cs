@@ -170,7 +170,6 @@ public class DataInitializer
         }
 
     }
-
     public void SeedBooking()
     {
         if (!dbContext.Booking.Any(b => b.Id == 1))

@@ -66,6 +66,27 @@ public class MenuSelection
         Menu.MainMenu();
 
     }
+    public static void Edit()
+    {
+        selMenuLimit = 3;
+        selection = ValidateSelection();
+
+        switch (selection)
+        {
+            case 1:
+                Menu.BookingMenu();
+                break;
+            case 2:
+                Menu.RegistrationMenu();
+                break;
+
+            case 3:
+
+                break;
+        }
+
+        Menu.MainMenu();
+    }
     public static int ValidateSelection()
     {
         int intSelection;

@@ -10,28 +10,20 @@ namespace HotelRoomManager.Controllers
 {
     public class RoomController
     {
-        private List<Room> allRooms = new List<Room>();
+        private Room.RoomType roomType;
 
-        public List<Room> AllRooms
-        {
-            get
-            {
-                return allRooms;
-            }
-            //set{}
-        }
 
 
         public int ControlExtraBedsBySize(Room room)
         {
 
-            if (room.Type.ToLower() == "single")
-                return 1;
+            if (room.Type == Convert.ToString(Room.RoomType.Single))
+                return Convert.ToInt32(Room.ExtraBeds.zero);
 
             if (room.Size < 30)
-                return 2;
+                return Convert.ToInt32(Room.ExtraBeds.one);
 
-            return 3;
+            return Convert.ToInt32(Room.ExtraBeds.two);
 
         }
 

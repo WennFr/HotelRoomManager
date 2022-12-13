@@ -13,7 +13,6 @@ namespace HotelRoomManager.Data
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Booking> Booking { get; set; }
         public DbSet<Room> Room { get; set; }
-        public DbSet<ExtraBed> ExtraBed { get; set; }
         public ApplicationDbContext()
         {
             //En tom konstruktor för migrations

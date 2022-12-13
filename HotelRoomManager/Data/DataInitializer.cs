@@ -1,5 +1,7 @@
-﻿using HotelRoomManager.Controllers;
+﻿using System.Globalization;
+using HotelRoomManager.Controllers;
 using Microsoft.EntityFrameworkCore;
+using static HotelRoomManager.Data.Room;
 
 namespace HotelRoomManager.Data;
 
@@ -14,15 +16,19 @@ public class DataInitializer
         dbContext.Database.Migrate();
 
     }
+
     public void Seed()
     {
         SeedSalutations();
-        SeedExtraBeds();
         dbContext.SaveChanges();
 
         SeedCustomers();
-        // SeedRooms();
+        SeedRooms();
         dbContext.SaveChanges();
+
+        SeedBooking();
+        dbContext.SaveChanges();
+
 
     }
 
@@ -35,38 +41,12 @@ public class DataInitializer
                 SalutationType = "Mr."
             });
         }
+
         if (!dbContext.Salutation.Any(s => s.SalutationType == "Ms."))
         {
             dbContext.Salutation.Add(new Salutation()
             {
                 SalutationType = "Ms."
-            });
-        }
-
-    }
-    public void SeedExtraBeds()
-    {
-        if (!dbContext.ExtraBed.Any(e => e.AllowedAmountOfExtraBeds == 0))
-        {
-            dbContext.ExtraBed.Add(new ExtraBed()
-            {
-                AllowedAmountOfExtraBeds = 0
-            });
-        }
-
-        if (!dbContext.ExtraBed.Any(e => e.AllowedAmountOfExtraBeds == 1))
-        {
-            dbContext.ExtraBed.Add(new ExtraBed()
-            {
-                AllowedAmountOfExtraBeds = 1
-            });
-        }
-
-        if (!dbContext.ExtraBed.Any(e => e.AllowedAmountOfExtraBeds == 2))
-        {
-            dbContext.ExtraBed.Add(new ExtraBed()
-            {
-                AllowedAmountOfExtraBeds = 2
             });
         }
 
@@ -87,18 +67,6 @@ public class DataInitializer
 
         }
 
-        if (!dbContext.Customer.Any(s => s.FirstName == "Rowan" && s.LastName == "Wilson"))
-        {
-            dbContext.Customer.Add(new Customer()
-            {
-                FirstName = "Rowan",
-                LastName = "Wilson",
-                Address = "383 Sauchiehall St.",
-                Phone = "+44-333623339",
-                SalutationId = 1
-            });
-
-        }
         if (!dbContext.Customer.Any(s => s.FirstName == "Maya" && s.LastName == "Schulz"))
         {
             dbContext.Customer.Add(new Customer()
@@ -111,6 +79,21 @@ public class DataInitializer
             });
 
         }
+
+
+        if (!dbContext.Customer.Any(s => s.FirstName == "Rowan" && s.LastName == "Wilson"))
+        {
+            dbContext.Customer.Add(new Customer()
+            {
+                FirstName = "Rowan",
+                LastName = "Wilson",
+                Address = "383 Sauchiehall St.",
+                Phone = "+44-333623339",
+                SalutationId = 1
+            });
+
+        }
+
         if (!dbContext.Customer.Any(s => s.FirstName == "Hannah" && s.LastName == "Dahlberg"))
         {
             dbContext.Customer.Add(new Customer()
@@ -133,74 +116,88 @@ public class DataInitializer
 
         if (!dbContext.Room.Any(r => r.Id == 1))
         {
-            dbContext.Room.Add(new Room()
+            room = new Room
             {
                 Floor = "1",
                 Type = "Single",
                 Size = 20,
-                ExtraBedId = 1
-            });
+
+            };
+
+            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
+            dbContext.Room.Add(room);
 
         }
 
         if (!dbContext.Room.Any(r => r.Id == 2))
         {
-            dbContext.Room.Add(new Room()
+            room = new Room
             {
                 Floor = "2",
                 Type = "Double",
                 Size = 27,
-                ExtraBedId = 2
-            });
+
+            };
+
+            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
+            dbContext.Room.Add(room);
+
 
         }
 
         if (!dbContext.Room.Any(r => r.Id == 3))
         {
 
-            dbContext.Room.Add(new Room()
+            room = new Room
             {
                 Floor = "2",
                 Type = "Single",
                 Size = 20,
-                ExtraBedId = 1
-            });
 
+            };
+
+            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
+            dbContext.Room.Add(room);
         }
 
         if (!dbContext.Room.Any(r => r.Id == 4))
         {
-
-             roomController = new RoomController();
-             room = new Room()
+            room = new Room()
             {
                 Floor = "1",
                 Type = "Double",
                 Size = 35,
             };
-
-            room.ExtraBedId = roomController.ControlExtraBedsBySize(room);
-
+            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
             dbContext.Room.Add(room);
-
-
         }
-
-
-
 
     }
 
 
+    public void SeedBooking()
+    {
+        if (!dbContext.Booking.Any(b => b.Id == 1))
+        {
+            var customer = new Customer();
+            foreach (var c in dbContext.Customer)
+                if (c.Id == 3)
+                    customer = c;
 
+            var room = new Room();
+            foreach (var r in dbContext.Room)
+                if (r.Id == 3)
+                    room = r;
 
+            dbContext.Booking.Add(new Booking()
+            {
+                StartDate = DateTime.ParseExact("2023-03-05", "yyyy-MM-dd", CultureInfo.CurrentCulture),
+                EndDate = DateTime.ParseExact("2023-03-10", "yyyy-MM-dd", CultureInfo.CurrentCulture),
+                Customer = customer,
+                Room = room
+            });
 
-
-
-
-
-
-
-
+        }
+    }
 
 }

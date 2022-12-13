@@ -35,7 +35,6 @@ namespace HotelRoomManager.Data
                 //  dbContext.Database.Migrate();
             }
 
-
         }
 
         public static DbContextOptionsBuilder<ApplicationDbContext> GetOptions()

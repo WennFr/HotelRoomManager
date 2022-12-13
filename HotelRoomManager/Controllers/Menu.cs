@@ -58,6 +58,7 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine($"Ändra uppgifter i systemet{Environment.NewLine}");
             Console.WriteLine("1) Ändra rum");
             Console.WriteLine("2) Ändra kunduppgifter");
+            Console.WriteLine("3) Ändra en bokning");
             Console.WriteLine("0) Gå tillbaka");
 
             MenuSelection.Registration();

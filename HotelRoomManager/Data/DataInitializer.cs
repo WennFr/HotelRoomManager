@@ -113,60 +113,49 @@ public class DataInitializer
 
         if (!dbContext.Room.Any(r => r.Id == 1))
         {
-            room = new Room
+            dbContext.Room.Add(new Room
             {
                 Floor = "1",
                 Type = "Single",
                 Size = 20,
                 ExtraBed = 0
 
-            };
-
-            dbContext.Room.Add(room);
-
+            });
         }
 
         if (!dbContext.Room.Any(r => r.Id == 2))
         {
-            room = new Room
+            dbContext.Room.Add(new Room
             {
                 Floor = "2",
                 Type = "Double",
                 Size = 27,
                 ExtraBed = 1
 
-            };
-
-            dbContext.Room.Add(room);
-
-
+            });
         }
 
         if (!dbContext.Room.Any(r => r.Id == 3))
         {
-
-            room = new Room
+            dbContext.Room.Add(new Room
             {
                 Floor = "2",
                 Type = "Single",
                 Size = 20,
                 ExtraBed = 0
 
-            };
-
-            dbContext.Room.Add(room);
+            });
         }
 
         if (!dbContext.Room.Any(r => r.Id == 4))
         {
-            room = new Room()
+            dbContext.Room.Add( new Room
             {
                 Floor = "1",
                 Type = "Double",
                 Size = 35,
                 ExtraBed = 2
-            };
-            dbContext.Room.Add(room);
+            });
         }
 
     }

@@ -66,7 +66,7 @@ public static class MenuSelection
                 create.CreateNewRoom();
                 break;
             case 2:
-                Menu.RegistrationMenu();
+                create.CreateNewCustomer();
                 break;
         }
 

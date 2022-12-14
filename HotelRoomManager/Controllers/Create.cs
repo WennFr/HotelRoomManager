@@ -51,17 +51,56 @@ namespace HotelRoomManager.Controllers
                     Console.ReadKey();
                 }
             }
-            Console.WriteLine($"{Environment.NewLine}Rum skapat.");
+            Console.WriteLine($"{Environment.NewLine}Nytt rum registrerat.");
             Console.WriteLine($"{Environment.NewLine}Tryck på enter för att gå tillbaka till menyn.");
             Console.ReadKey();
         }
 
         public void CreateNewCustomer()
         {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Registrera ny kund");
+                Console.WriteLine("==================");
+                var customerController = new CustomerController(dbContext);
+                try
+                {
+                    Console.WriteLine($"{Environment.NewLine}Välj titel:");
+                    var salutationId = customerController.ControlCustomerSalutation();
+                    Console.WriteLine($"{Environment.NewLine}Förnamn:");
+                    var firstName = Console.ReadLine();
+                    Console.WriteLine($"{Environment.NewLine}Efternamn:");
+                    var lastName = Console.ReadLine();
+                    Console.WriteLine($"{Environment.NewLine}Adress:");
+                    var address = Console.ReadLine();
+                    Console.WriteLine($"{Environment.NewLine}Telefon:");
+                    var phone = Console.ReadLine();
 
+                    dbContext.Customer.Add(new Customer()
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Address = address,
+                        Phone = phone,
+                        SalutationId = salutationId
+                    });
+                    dbContext.SaveChanges();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    //skapa message class
+                    Console.WriteLine($"{Environment.NewLine}Felaktig inmatning, försök igen.");
+                    Console.WriteLine($"{Environment.NewLine}Tryck på enter för starta om.");
+                    Console.ReadKey();
+                }
 
+            }
 
-
+            Console.WriteLine($"{Environment.NewLine}Ny kund registrerad.");
+            Console.WriteLine($"{Environment.NewLine}Tryck på enter för att gå tillbaka till menyn.");
+            Console.ReadKey();
 
 
         }

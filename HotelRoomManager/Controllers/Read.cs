@@ -21,14 +21,8 @@ namespace HotelRoomManager.Controllers
         {
             foreach (var customer in dbContext.Customer.Include(s=> s.SalutationId))
             {
-                Console.WriteLine($"{customer.Id} {customer.SalutationId} {customer.FirstName} {customer.LastName}");
-
-                //if (person.County != null)
-                //{
-                //    Console.WriteLine($"County kontakperson: {person.County.ContactPerson}");
-                //}
-
-                Console.WriteLine("====================");
+                Console.WriteLine($"{customer.Id} {customer.SalutationId.sa} {customer.FirstName} {customer.LastName}");
+                Console.WriteLine("===============================================================================");
             }
 
         }

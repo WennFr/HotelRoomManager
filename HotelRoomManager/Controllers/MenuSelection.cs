@@ -26,7 +26,7 @@ public static class MenuSelection
                 Menu.RegistrationMenu();
                 break;
             case 3:
-                Menu.EditMenu();
+                Menu.EditSystemDataMenu();
                 break;
         }
 
@@ -48,7 +48,7 @@ public static class MenuSelection
                 Menu.RegistrationMenu();
                 break;
             case 3:
-                Menu.EditMenu();
+                Menu.EditSystemDataMenu();
                 break;
         }
 
@@ -77,14 +77,14 @@ public static class MenuSelection
     {
         selMenuLimit = 3;
         selection = ValidateSelection();
-
+        var update = new Update(dbContext);
         switch (selection)
         {
             case 1:
-                Menu.BookingMenu();
+              
                 break;
             case 2:
-                Menu.RegistrationMenu();
+                update.UpdateCustomer();
                 break;
 
             case 3:

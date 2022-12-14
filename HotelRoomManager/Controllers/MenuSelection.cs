@@ -73,7 +73,7 @@ public static class MenuSelection
         Menu.MainMenu();
 
     }
-    public static void Edit()
+    public static void EditSystemData()
     {
         selMenuLimit = 3;
         selection = ValidateSelection();

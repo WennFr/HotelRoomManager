@@ -102,8 +102,9 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine($"{Environment.NewLine}Tryck på enter för att gå tillbaka till menyn.");
             Console.ReadKey();
 
-
         }
+
+
 
 
 

@@ -10,7 +10,6 @@ namespace HotelRoomManager.Controllers
 {
     public static class Menu
     {
-      
         public static void MainMenu()
         {
             var isRunning = true;
@@ -50,7 +49,7 @@ namespace HotelRoomManager.Controllers
             MenuSelection.Registration();
         }
 
-        public static void EditMenu()
+        public static void EditSystemDataMenu()
         {
             Console.Clear();
             Console.WriteLine($"Ändra uppgifter i systemet{Environment.NewLine}");

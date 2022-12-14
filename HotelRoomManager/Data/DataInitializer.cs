@@ -53,15 +53,18 @@ public class DataInitializer
 
     public void SeedCustomers()
     {
+        var customerController = new CustomerController(dbContext);
         if (!dbContext.Customer.Any(s => s.FirstName == "Lars" && s.LastName == "Johansson"))
         {
+           
             dbContext.Customer.Add(new Customer()
             {
                 FirstName = "Lars",
                 LastName = "Johansson",
                 Address = "Torsgatan 7",
                 Phone = "+46-222238934",
-                SalutationId = 1
+                Salutation = customerController.GetMaleSalutation()
+                
             });
 
         }
@@ -74,7 +77,7 @@ public class DataInitializer
                 LastName = "Schulz",
                 Address = "Wrangelstrasse 127",
                 Phone = "+49-111555350",
-                SalutationId = 2
+                Salutation = customerController.GetFemaleSalutation()
             });
 
         }
@@ -88,7 +91,7 @@ public class DataInitializer
                 LastName = "Wilson",
                 Address = "383 Sauchiehall St.",
                 Phone = "+44-333623339",
-                SalutationId = 1
+                Salutation = customerController.GetMaleSalutation()
             });
 
         }
@@ -101,7 +104,7 @@ public class DataInitializer
                 LastName = "Dahlberg",
                 Address = "Admiralsgatan 89",
                 Phone = "+46-777555359",
-                SalutationId = 2
+                Salutation = customerController.GetFemaleSalutation()
             });
 
         }

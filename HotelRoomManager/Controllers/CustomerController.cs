@@ -17,8 +17,7 @@ namespace HotelRoomManager.Controllers
             dbContext = context;
         }
 
-
-        public int ControlCustomerSalutation()
+        public Salutation ControlCustomerSalutation()
         {
             int intSelection;
             Console.WriteLine($"{Environment.NewLine}Välj titel:");
@@ -28,13 +27,46 @@ namespace HotelRoomManager.Controllers
 
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out intSelection) && dbContext.Salutation.Any(s=> s.Id == intSelection))
-                    return intSelection;
+                if (int.TryParse(Console.ReadLine(), out intSelection) &&
+                    dbContext.Salutation.Any(s => s.Id == intSelection))
+                {
+                    var salutation = dbContext.Salutation.FirstOrDefault(s => s.Id == intSelection);
+                    return salutation;
+                }
 
                 Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
             }
 
+        }
 
+        public Salutation GetMaleSalutation()
+        {
+            var salutation = dbContext.Salutation.FirstOrDefault(s => s.Id == 1);
+            return salutation;
+        }
+
+        public Salutation GetFemaleSalutation()
+        {
+            var salutation = dbContext.Salutation.FirstOrDefault(s => s.Id == 2);
+            return salutation;
+        }
+
+
+        public Customer ChooseCustomer()
+        {
+            int intSelection;
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out intSelection) &&
+                    dbContext.Customer.Any(c => c.Id == intSelection))
+                {
+                    var customer = dbContext.Customer.FirstOrDefault(s => s.Id == intSelection);
+                    Console.Clear();
+                    return customer;
+                }
+
+                Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+            }
 
         }
 

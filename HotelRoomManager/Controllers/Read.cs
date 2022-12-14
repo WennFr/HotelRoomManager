@@ -19,10 +19,11 @@ namespace HotelRoomManager.Controllers
 
         public void ReadAllCustomers()
         {
-            foreach (var customer in dbContext.Customer.Include(s=> s.SalutationId))
+            Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
+            foreach (var customer in dbContext.Customer.Include(s=> s.Salutation))
             {
-                Console.WriteLine($"{customer.Id} {customer.SalutationId.sa} {customer.FirstName} {customer.LastName}");
-                Console.WriteLine("===============================================================================");
+                Console.WriteLine($"{customer.Id} |{customer.Salutation.SalutationType} {customer.FirstName} {customer.LastName}/{customer.Address}/{customer.Phone}");
+                Console.WriteLine($"--|-------------------------------------------------------");
             }
 
         }

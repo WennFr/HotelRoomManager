@@ -67,7 +67,7 @@ namespace HotelRoomManager.Controllers
                 try
                 {
                     Console.WriteLine($"{Environment.NewLine}Välj titel:");
-                    var salutationId = customerController.ControlCustomerSalutation();
+                    var salutationInput = customerController.ControlCustomerSalutation();
                     Console.WriteLine($"{Environment.NewLine}Förnamn:");
                     var firstName = Console.ReadLine();
                     Console.WriteLine($"{Environment.NewLine}Efternamn:");
@@ -83,7 +83,7 @@ namespace HotelRoomManager.Controllers
                         LastName = lastName,
                         Address = address,
                         Phone = phone,
-                        SalutationId = salutationId
+                        Salutation = salutationInput
                     });
                     dbContext.SaveChanges();
                     break;
@@ -97,11 +97,9 @@ namespace HotelRoomManager.Controllers
                 }
 
             }
-
             Console.WriteLine($"{Environment.NewLine}Ny kund registrerad.");
             Console.WriteLine($"{Environment.NewLine}Tryck på enter för att gå tillbaka till menyn.");
             Console.ReadKey();
-
         }
 
 

@@ -14,7 +14,9 @@ namespace HotelRoomManager.Data
         [Required]
         [MaxLength(5)]
         public string SalutationType { get; set; }
-        public ICollection<Customer> Customer { get; set; }
+
+
+        //public ICollection<Customer> Customer { get; set; }
 
 
     }

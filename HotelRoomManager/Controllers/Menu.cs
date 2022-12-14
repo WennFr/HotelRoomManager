@@ -58,9 +58,21 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("3) Ändra en bokning");
             Console.WriteLine("0) Gå tillbaka");
 
-            MenuSelection.EditSystemData();
+            MenuSelection.UpdateSystemData();
 
         }
+        public static void UpdateCustomerSelectionMenu()
+        {
+            ;
+            Console.WriteLine("1) Titel");
+            Console.WriteLine("2) Namn");
+            Console.WriteLine("3) Adress");
+            Console.WriteLine("4) Telefonnummer");
+            Console.WriteLine("0) Spara och gå tillbaka");
+
+        }
+
+
 
 
     }

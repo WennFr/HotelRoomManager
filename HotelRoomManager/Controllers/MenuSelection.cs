@@ -15,7 +15,7 @@ public static class MenuSelection
     public static bool Main()
     {
         selMenuLimit = 3;
-        var selection = ValidateSelection();
+        var selection = ValidateSelection(selMenuLimit);
 
         switch (selection)
         {
@@ -37,7 +37,7 @@ public static class MenuSelection
     public static void Booking()
     {
         selMenuLimit = 3;
-        selection = ValidateSelection();
+        selection = ValidateSelection(selMenuLimit);
 
         switch (selection)
         {
@@ -58,7 +58,7 @@ public static class MenuSelection
     public static void Registration()
     {
         selMenuLimit = 2;
-        selection = ValidateSelection();
+        selection = ValidateSelection(selMenuLimit);
         var create = new Create(dbContext);
         switch (selection)
         {
@@ -73,10 +73,10 @@ public static class MenuSelection
         Menu.MainMenu();
 
     }
-    public static void EditSystemData()
+    public static void UpdateSystemData()
     {
         selMenuLimit = 3;
-        selection = ValidateSelection();
+        selection = ValidateSelection(selMenuLimit);
         var update = new Update(dbContext);
         switch (selection)
         {
@@ -94,7 +94,9 @@ public static class MenuSelection
 
         Menu.MainMenu();
     }
-    public static int ValidateSelection()
+
+   
+    public static int ValidateSelection(int selMenuLimit)
     {
         int intSelection;
         Console.WriteLine($"{Environment.NewLine}Välj i menyn:");

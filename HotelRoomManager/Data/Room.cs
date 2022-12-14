@@ -23,8 +23,8 @@ namespace HotelRoomManager.Data
 
         public enum RoomType
         {
-            Single,
-            Double
+            Single = 1,
+            Double = 2
 
         }
         public enum ExtraBeds

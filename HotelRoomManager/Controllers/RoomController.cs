@@ -10,19 +10,21 @@ namespace HotelRoomManager.Controllers
 {
     public class RoomController
     {
+
         public string ControlCorrectRoomType()
         {
-            Console.WriteLine($"{Environment.NewLine}Rumstyp: Single eller Double?:");
+            Console.WriteLine($"{Environment.NewLine}Rumstyp: [1]Single eller [2]Double?:");
 
             while (true)
             {
-                if (Enum.TryParse<Room.RoomType>(Console.ReadLine(), ignoreCase: true, out var type))
+                var input = Console.ReadLine();
+                if (Enum.TryParse<Room.RoomType>(input, ignoreCase: true, out var type) && Enum.IsDefined(type))
                     return type.ToString();
 
-                Console.WriteLine("Var god välj mellan single eller double. ");
+                Console.WriteLine("Var god välj mellan Single eller Double. ");
             }
         }
-        public int ControlExtraBedsBySize(string type, int size)
+        public int ControlExtraBedsByTypeAndSize(string type, int size)
         {
 
             if (type == Convert.ToString(Room.RoomType.Single))

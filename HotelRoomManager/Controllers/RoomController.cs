@@ -10,30 +10,30 @@ namespace HotelRoomManager.Controllers
 {
     public class RoomController
     {
-        private Room.RoomType roomType;
+        public string ControlCorrectRoomType()
+        {
+            Console.WriteLine($"{Environment.NewLine}Rumstyp: Single eller Double?:");
 
+            while (true)
+            {
+                if (Enum.TryParse<Room.RoomType>(Console.ReadLine(), ignoreCase: true, out var type))
+                    return type.ToString();
 
-
-
-
-
-        public int ControlExtraBedsBySize(Room room)
+                Console.WriteLine("Var god välj mellan single eller double. ");
+            }
+        }
+        public int ControlExtraBedsBySize(string type, int size)
         {
 
-            if (room.Type == Convert.ToString(Room.RoomType.Single))
+            if (type == Convert.ToString(Room.RoomType.Single))
                 return Convert.ToInt32(Room.ExtraBeds.zero);
 
-            if (room.Size < 30)
+            if (size < 30)
                 return Convert.ToInt32(Room.ExtraBeds.one);
 
             return Convert.ToInt32(Room.ExtraBeds.two);
 
         }
-
-
-
-
-
 
     }
 }

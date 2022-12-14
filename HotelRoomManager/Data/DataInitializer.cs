@@ -118,10 +118,10 @@ public class DataInitializer
                 Floor = "1",
                 Type = "Single",
                 Size = 20,
+                ExtraBed = 0
 
             };
 
-            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
             dbContext.Room.Add(room);
 
         }
@@ -133,10 +133,10 @@ public class DataInitializer
                 Floor = "2",
                 Type = "Double",
                 Size = 27,
+                ExtraBed = 1
 
             };
 
-            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
             dbContext.Room.Add(room);
 
 
@@ -150,10 +150,10 @@ public class DataInitializer
                 Floor = "2",
                 Type = "Single",
                 Size = 20,
+                ExtraBed = 0
 
             };
 
-            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
             dbContext.Room.Add(room);
         }
 
@@ -164,8 +164,8 @@ public class DataInitializer
                 Floor = "1",
                 Type = "Double",
                 Size = 35,
+                ExtraBed = 2
             };
-            room.ExtraBed = roomController.ControlExtraBedsBySize(room);
             dbContext.Room.Add(room);
         }
 

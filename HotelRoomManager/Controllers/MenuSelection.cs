@@ -63,7 +63,7 @@ public static class MenuSelection
         switch (selection)
         {
             case 1:
-                Menu.BookingMenu();
+                create.CreateNewRoom();
                 break;
             case 2:
                 Menu.RegistrationMenu();

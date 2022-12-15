@@ -56,14 +56,28 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("1) Ändra rum");
             Console.WriteLine("2) Ändra kunduppgifter");
             Console.WriteLine("3) Ändra en bokning");
+            Console.WriteLine("4) Radera");
             Console.WriteLine("0) Gå tillbaka");
 
             MenuSelection.UpdateSystemData();
 
         }
+
+        public static void DeleteSelectionMenu()
+        {
+            Console.WriteLine("1) Radera rum");
+            Console.WriteLine("2) Radera kund");
+            Console.WriteLine("3) Radera bokning");
+            Console.WriteLine("0) Gå tillbaka");
+
+
+
+        }
+
+
         public static void UpdateCustomerSelectionMenu()
         {
-            ;
+            
             Console.WriteLine("1) Titel");
             Console.WriteLine("2) Namn");
             Console.WriteLine("3) Adress");
@@ -73,7 +87,15 @@ namespace HotelRoomManager.Controllers
         }
 
 
+        public static void UpdateRoomSelectionMenu()
+        {
+
+            Console.WriteLine("1) Våning");
+            Console.WriteLine("2) Rumstyp & Storlek");
+            Console.WriteLine("0) Spara och gå tillbaka");
 
 
+
+        }
     }
 }

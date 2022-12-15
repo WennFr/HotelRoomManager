@@ -20,6 +20,7 @@ namespace HotelRoomManager.Data
         [MaxLength(30)]
         public string? Phone { get; set; }
         public Salutation Salutation { get; set; }
+        public List<Booking> CustomerBookings { get; set; }
        
 
 

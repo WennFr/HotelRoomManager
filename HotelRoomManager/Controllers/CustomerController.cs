@@ -22,15 +22,15 @@ namespace HotelRoomManager.Controllers
             int intSelection;
             Console.WriteLine($"{Environment.NewLine}Välj titel:");
 
-            foreach (var salutation in dbContext.Salutation)
+            foreach (var salutation in dbContext.Salutations)
                 Console.WriteLine($"{salutation.Id} - {salutation.SalutationType}");
 
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out intSelection) &&
-                    dbContext.Salutation.Any(s => s.Id == intSelection))
+                    dbContext.Salutations.Any(s => s.Id == intSelection))
                 {
-                    var salutation = dbContext.Salutation.FirstOrDefault(s => s.Id == intSelection);
+                    var salutation = dbContext.Salutations.FirstOrDefault(s => s.Id == intSelection);
                     return salutation;
                 }
 
@@ -38,16 +38,15 @@ namespace HotelRoomManager.Controllers
             }
 
         }
-
         public Salutation GetMaleSalutation()
         {
-            var salutation = dbContext.Salutation.FirstOrDefault(s => s.Id == 1);
+            var salutation = dbContext.Salutations.FirstOrDefault(s => s.Id == 1);
             return salutation;
         }
 
         public Salutation GetFemaleSalutation()
         {
-            var salutation = dbContext.Salutation.FirstOrDefault(s => s.Id == 2);
+            var salutation = dbContext.Salutations.FirstOrDefault(s => s.Id == 2);
             return salutation;
         }
 
@@ -55,12 +54,14 @@ namespace HotelRoomManager.Controllers
         public Customer ChooseCustomer()
         {
             int intSelection;
+            Console.WriteLine($"Välj Id på den kund du vill ändra på:");
+
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out intSelection) &&
-                    dbContext.Customer.Any(c => c.Id == intSelection))
+                    dbContext.Customers.Any(c => c.Id == intSelection))
                 {
-                    var customer = dbContext.Customer.FirstOrDefault(s => s.Id == intSelection);
+                    var customer = dbContext.Customers.FirstOrDefault(s => s.Id == intSelection);
                     Console.Clear();
                     return customer;
                 }

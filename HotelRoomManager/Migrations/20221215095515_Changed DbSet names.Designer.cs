@@ -4,6 +4,7 @@ using HotelRoomManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelRoomManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221215095515_Changed DbSet names")]
+    partial class ChangedDbSetnames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,13 +140,13 @@ namespace HotelRoomManager.Migrations
             modelBuilder.Entity("HotelRoomManager.Data.Booking", b =>
                 {
                     b.HasOne("HotelRoomManager.Data.Customer", "Customer")
-                        .WithMany("CustomerBookings")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HotelRoomManager.Data.Room", "Room")
-                        .WithMany("RoomBookings")
+                        .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -162,16 +165,6 @@ namespace HotelRoomManager.Migrations
                         .IsRequired();
 
                     b.Navigation("Salutation");
-                });
-
-            modelBuilder.Entity("HotelRoomManager.Data.Customer", b =>
-                {
-                    b.Navigation("CustomerBookings");
-                });
-
-            modelBuilder.Entity("HotelRoomManager.Data.Room", b =>
-                {
-                    b.Navigation("RoomBookings");
                 });
 #pragma warning restore 612, 618
         }

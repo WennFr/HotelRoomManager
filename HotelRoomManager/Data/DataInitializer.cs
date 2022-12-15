@@ -33,17 +33,17 @@ public class DataInitializer
 
     public void SeedSalutations()
     {
-        if (!dbContext.Salutation.Any(s => s.SalutationType == "Mr."))
+        if (!dbContext.Salutations.Any(s => s.SalutationType == "Mr."))
         {
-            dbContext.Salutation.Add(new Salutation()
+            dbContext.Salutations.Add(new Salutation()
             {
                 SalutationType = "Mr."
             });
         }
 
-        if (!dbContext.Salutation.Any(s => s.SalutationType == "Ms."))
+        if (!dbContext.Salutations.Any(s => s.SalutationType == "Ms."))
         {
-            dbContext.Salutation.Add(new Salutation()
+            dbContext.Salutations.Add(new Salutation()
             {
                 SalutationType = "Ms."
             });
@@ -54,10 +54,10 @@ public class DataInitializer
     public void SeedCustomers()
     {
         var customerController = new CustomerController(dbContext);
-        if (!dbContext.Customer.Any(s => s.FirstName == "Lars" && s.LastName == "Johansson"))
+        if (!dbContext.Customers.Any(s => s.FirstName == "Lars" && s.LastName == "Johansson"))
         {
            
-            dbContext.Customer.Add(new Customer()
+            dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Lars",
                 LastName = "Johansson",
@@ -69,9 +69,9 @@ public class DataInitializer
 
         }
 
-        if (!dbContext.Customer.Any(s => s.FirstName == "Maya" && s.LastName == "Schulz"))
+        if (!dbContext.Customers.Any(s => s.FirstName == "Maya" && s.LastName == "Schulz"))
         {
-            dbContext.Customer.Add(new Customer()
+            dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Maya",
                 LastName = "Schulz",
@@ -79,13 +79,11 @@ public class DataInitializer
                 Phone = "+49-111555350",
                 Salutation = customerController.GetFemaleSalutation()
             });
-
         }
 
-
-        if (!dbContext.Customer.Any(s => s.FirstName == "Rowan" && s.LastName == "Wilson"))
+        if (!dbContext.Customers.Any(s => s.FirstName == "Rowan" && s.LastName == "Wilson"))
         {
-            dbContext.Customer.Add(new Customer()
+            dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Rowan",
                 LastName = "Wilson",
@@ -96,9 +94,9 @@ public class DataInitializer
 
         }
 
-        if (!dbContext.Customer.Any(s => s.FirstName == "Hannah" && s.LastName == "Dahlberg"))
+        if (!dbContext.Customers.Any(s => s.FirstName == "Hannah" && s.LastName == "Dahlberg"))
         {
-            dbContext.Customer.Add(new Customer()
+            dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Hannah",
                 LastName = "Dahlberg",
@@ -111,12 +109,12 @@ public class DataInitializer
     }
     public void SeedRooms()
     {
-        var roomController = new RoomController();
+        var roomController = new RoomController(dbContext);
         var room = new Room();
 
-        if (!dbContext.Room.Any(r => r.Id == 1))
+        if (!dbContext.Rooms.Any(r => r.Id == 1))
         {
-            dbContext.Room.Add(new Room
+            dbContext.Rooms.Add(new Room
             {
                 Floor = "1",
                 Type = "Single",
@@ -126,9 +124,9 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Room.Any(r => r.Id == 2))
+        if (!dbContext.Rooms.Any(r => r.Id == 2))
         {
-            dbContext.Room.Add(new Room
+            dbContext.Rooms.Add(new Room
             {
                 Floor = "2",
                 Type = "Double",
@@ -138,9 +136,9 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Room.Any(r => r.Id == 3))
+        if (!dbContext.Rooms.Any(r => r.Id == 3))
         {
-            dbContext.Room.Add(new Room
+            dbContext.Rooms.Add(new Room
             {
                 Floor = "2",
                 Type = "Single",
@@ -150,9 +148,9 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Room.Any(r => r.Id == 4))
+        if (!dbContext.Rooms.Any(r => r.Id == 4))
         {
-            dbContext.Room.Add( new Room
+            dbContext.Rooms.Add( new Room
             {
                 Floor = "1",
                 Type = "Double",
@@ -164,19 +162,19 @@ public class DataInitializer
     }
     public void SeedBooking()
     {
-        if (!dbContext.Booking.Any(b => b.Id == 1))
+        if (!dbContext.Bookings.Any(b => b.Id == 1))
         {
             var customer = new Customer();
-            foreach (var c in dbContext.Customer)
+            foreach (var c in dbContext.Customers)
                 if (c.Id == 3)
                     customer = c;
 
             var room = new Room();
-            foreach (var r in dbContext.Room)
+            foreach (var r in dbContext.Rooms)
                 if (r.Id == 3)
                     room = r;
 
-            dbContext.Booking.Add(new Booking()
+            dbContext.Bookings.Add(new Booking()
             {
                 StartDate = DateTime.ParseExact("2023-03-05", "yyyy-MM-dd", CultureInfo.CurrentCulture),
                 EndDate = DateTime.ParseExact("2023-03-10", "yyyy-MM-dd", CultureInfo.CurrentCulture),

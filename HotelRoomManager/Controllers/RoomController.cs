@@ -10,6 +10,11 @@ namespace HotelRoomManager.Controllers
 {
     public class RoomController
     {
+        public ApplicationDbContext dbContext { get; set; }
+        public RoomController(ApplicationDbContext context)
+        {
+            dbContext = context;
+        }
 
         public string ControlCorrectRoomType()
         {
@@ -36,6 +41,32 @@ namespace HotelRoomManager.Controllers
             return Convert.ToInt32(Room.ExtraBeds.two);
 
         }
+
+        public Room ChooseRoom()
+        {
+            int intSelection;
+            Console.WriteLine($"Välj Id på rummet du vill ändra på:");
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out intSelection) &&
+                    dbContext.Rooms.Any(c => c.Id == intSelection))
+                {
+                    var roomSelection = dbContext.Rooms.FirstOrDefault(s => s.Id == intSelection);
+                    Console.Clear();
+                    return roomSelection;
+                }
+
+                Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+            }
+
+        }
+
+
+
+
+
+
+
 
     }
 }

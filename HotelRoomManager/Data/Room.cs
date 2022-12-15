@@ -20,6 +20,7 @@ namespace HotelRoomManager.Data
         public string Type { get; set; }
         public int Size { get; set; }
         public int ExtraBed { get; set; }
+        public List<Booking> RoomBookings { get; set; }
 
         public enum RoomType
         {

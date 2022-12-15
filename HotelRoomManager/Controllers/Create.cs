@@ -22,7 +22,7 @@ namespace HotelRoomManager.Controllers
                 Console.Clear();
                 Console.WriteLine("Registrera nytt rum");
                 Console.WriteLine("===================");
-                var roomController = new RoomController();
+                var roomController = new RoomController(dbContext);
                 try
                 {
                     Console.WriteLine($"{Environment.NewLine}Rumsvåning:");
@@ -33,7 +33,7 @@ namespace HotelRoomManager.Controllers
                     var extraBed = roomController.ControlExtraBedsByTypeAndSize(type, size);
                     Console.WriteLine($"{Environment.NewLine}Antal tillåtna sängar sätts automatiskt efter rumsstorlek.  ");
                     Thread.Sleep(2000);
-                    dbContext.Room.Add(new Room()
+                    dbContext.Rooms.Add(new Room()
                     {
                         Floor = floor,
                         Type = type,
@@ -77,7 +77,7 @@ namespace HotelRoomManager.Controllers
                     Console.WriteLine($"{Environment.NewLine}Telefon:");
                     var phone = Console.ReadLine();
 
-                    dbContext.Customer.Add(new Customer()
+                    dbContext.Customers.Add(new Customer()
                     {
                         FirstName = firstName,
                         LastName = lastName,

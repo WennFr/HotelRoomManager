@@ -95,14 +95,14 @@ public static class MenuSelection
 
         Menu.MainMenu();
     }
-    public static int ValidateSelection(int selMenuLimit)
+    public static int ValidateSelection(int selectionMenuLimit)
     {
         int intSelection;
         Console.WriteLine($"{Environment.NewLine}Välj i menyn:");
         while (true)
         {
             Console.Write("> ");
-            if (int.TryParse(Console.ReadLine(), out intSelection) && intSelection >= 0 && intSelection <= selMenuLimit)
+            if (int.TryParse(Console.ReadLine(), out intSelection) && intSelection >= 0 && intSelection <= selectionMenuLimit)
                 return intSelection;
 
             Console.WriteLine("Välj mellan de angivna siffrorna i menyn");

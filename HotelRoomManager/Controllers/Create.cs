@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelRoomManager.View;
 
 namespace HotelRoomManager.Controllers
 {
@@ -104,16 +105,58 @@ namespace HotelRoomManager.Controllers
 
         public void CreateNewBooking()
         {
+            Console.Clear();
+            Console.WriteLine($"Ny Bokning");
+            Console.WriteLine($"========== {Environment.NewLine}");
+
+            var newBooking = new Booking();
+            var bookingController = new BookingController(dbContext);
+
+            var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
+            var amountOfBookedNights = bookingController.SelectAmountOfNights();
+            newBooking.StartDate = bookingController.SelectStartDate();
+
+          //if (amountOfBookedNights == 1) newBooking.EndDate = newBooking.StartDate;
+            if (amountOfBookedNights > 0) newBooking.EndDate = newBooking.StartDate.AddDays(amountOfBookedNights);
+
+            List<DateTime> newBookingTotalNights = new List<DateTime>();
+            for (var dt = newBooking.StartDate; dt <= newBooking.EndDate; dt = dt.AddDays(1))
+            {
+                newBookingTotalNights.Add(dt);
+            }
 
 
 
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("1) Välj kund för att skapa bokning");
+                Console.WriteLine("2) Registrera ny kund");
+                Console.WriteLine("0) Gå tillbaka");
 
+                var selectionMenuLimit = 2;
+                var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
+                var customerController = new CustomerController(dbContext);
+                Customer customer;
 
+                switch (selection)
+                {
+                    case 1:
+                        var read = new Read(dbContext);
+                        read.ReadAllCustomers();
+                        customer = customerController.ChooseCustomer();
+                        break;
 
+                    case 2:
+                        CreateNewCustomer();
+                        continue;
+                }
+
+                break;
+            }
 
         }
-
 
 
 

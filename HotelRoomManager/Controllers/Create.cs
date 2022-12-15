@@ -102,6 +102,17 @@ namespace HotelRoomManager.Controllers
             Console.ReadKey();
         }
 
+        public void CreateNewBooking()
+        {
+
+
+
+
+
+
+
+
+        }
 
 
 

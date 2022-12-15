@@ -4,8 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using HotelRoomManager.Controllers;
 using HotelRoomManager.Data;
+using HotelRoomManager.View;
 
 namespace HotelRoomManager
 {

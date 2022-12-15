@@ -1,6 +1,7 @@
-﻿using HotelRoomManager.Data;
+﻿using HotelRoomManager.Controllers;
+using HotelRoomManager.Data;
 
-namespace HotelRoomManager.Controllers;
+namespace HotelRoomManager.View;
 
 public static class MenuSelection
 {
@@ -36,10 +37,11 @@ public static class MenuSelection
         selMenuLimit = 3;
         selection = ValidateSelection(selMenuLimit);
 
+        var create = new Create(dbContext);
         switch (selection)
         {
             case 1:
-                Menu.BookingMenu();
+                create.CreateNewBooking();
                 break;
             case 2:
                 Menu.RegistrationMenu();
@@ -86,7 +88,7 @@ public static class MenuSelection
                 update.UpdateBooking();
                 break;
             case 4:
-                delete.DeleteEntity();
+                delete.DeleteEntitySelection();
                 break;
 
         }

@@ -6,23 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
 
-namespace HotelRoomManager.Controllers
+namespace HotelRoomManager.View
 {
     public static class Menu
     {
         public static void MainMenu()
         {
-            var isRunning = true;
-            while (isRunning)
+            var applicationIsRunning = true;
+
+            while (applicationIsRunning)
             {
                 Console.Clear();
                 Console.WriteLine($"Huvudmeny {Environment.NewLine}");
                 Console.WriteLine("1) Bokningar");
-                Console.WriteLine("2) Registreringar");
-                Console.WriteLine("3) Ändra uppgifter i systemet");
+                Console.WriteLine("2) Registrera");
+                Console.WriteLine("3) Ändra systemuppgifter");
                 Console.WriteLine("0) Avsluta applikationen");
 
-                isRunning = MenuSelection.Main();
+                applicationIsRunning = MenuSelection.Main();
             }
 
         }
@@ -41,7 +42,7 @@ namespace HotelRoomManager.Controllers
         public static void RegistrationMenu()
         {
             Console.Clear();
-            Console.WriteLine($"Registreringar {Environment.NewLine}");
+            Console.WriteLine($"Registrera {Environment.NewLine}");
             Console.WriteLine("1) Registrera nytt rum");
             Console.WriteLine("2) Registrera ny kund");
             Console.WriteLine("0) Gå tillbaka");
@@ -52,7 +53,7 @@ namespace HotelRoomManager.Controllers
         public static void EditSystemDataMenu()
         {
             Console.Clear();
-            Console.WriteLine($"Ändra uppgifter i systemet{Environment.NewLine}");
+            Console.WriteLine($"Ändra systemuppgifter{Environment.NewLine}");
             Console.WriteLine("1) Ändra rum");
             Console.WriteLine("2) Ändra kunduppgifter");
             Console.WriteLine("3) Ändra en bokning");
@@ -74,13 +75,12 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("0) Gå tillbaka");
 
 
-
         }
 
 
         public static void UpdateCustomerSelectionMenu()
         {
-            
+
             Console.WriteLine("1) Titel");
             Console.WriteLine("2) Namn");
             Console.WriteLine("3) Adress");
@@ -96,8 +96,6 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("1) Våning");
             Console.WriteLine("2) Rumstyp & Storlek");
             Console.WriteLine("0) Spara och gå tillbaka");
-
-
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using HotelRoomManager.Data;
+using HotelRoomManager.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace HotelRoomManager.Controllers
             dbContext = context;
         }
 
-        public void DeleteEntity()
+        public void DeleteEntitySelection()
         {
             Menu.DeleteSelectionMenu();
             var selectionMenuLimit = 3;

@@ -54,7 +54,7 @@ namespace HotelRoomManager.Controllers
         public Customer ChooseCustomer()
         {
             int intSelection;
-            Console.WriteLine($"Välj Id på den kund du vill ändra på:");
+            Console.WriteLine($"Välj Id på den kund du vill välja:");
 
             while (true)
             {

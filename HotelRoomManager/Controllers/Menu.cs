@@ -65,6 +65,9 @@ namespace HotelRoomManager.Controllers
 
         public static void DeleteSelectionMenu()
         {
+            Console.Clear();
+            Console.WriteLine("Radera");
+            Console.WriteLine($"=================== {Environment.NewLine}");
             Console.WriteLine("1) Radera rum");
             Console.WriteLine("2) Radera kund");
             Console.WriteLine("3) Radera bokning");

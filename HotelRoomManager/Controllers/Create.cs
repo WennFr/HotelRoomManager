@@ -31,7 +31,7 @@ namespace HotelRoomManager.Controllers
                     Console.WriteLine($"{Environment.NewLine}Rumsstorlek (siffra i kvm):  ");
                     var size = Convert.ToInt32(Console.ReadLine());
                     var extraBed = roomController.ControlExtraBedsByTypeAndSize(type, size);
-                    Console.WriteLine($"{Environment.NewLine}Antal tillåtna sängar sätts automatiskt efter rumsstorlek.  ");
+                    Console.WriteLine($"{Environment.NewLine}Antal tillåtna sängar sätts automatiskt efter rumsstorlek.");
                     Thread.Sleep(2000);
                     dbContext.Rooms.Add(new Room()
                     {

@@ -70,7 +70,7 @@ public static class MenuSelection
     }
     public static void UpdateSystemData()
     {
-        selMenuLimit = 3;
+        selMenuLimit = 4;
         selection = ValidateSelection(selMenuLimit);
         var update = new Update(dbContext);
         var delete = new Delete(dbContext);

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HotelRoomManager.View;
+using System.Runtime.ConstrainedExecution;
 
 namespace HotelRoomManager.Controllers
 {
@@ -116,45 +117,89 @@ namespace HotelRoomManager.Controllers
             var amountOfBookedNights = bookingController.SelectAmountOfNights();
             newBooking.StartDate = bookingController.SelectStartDate();
 
-          //if (amountOfBookedNights == 1) newBooking.EndDate = newBooking.StartDate;
             if (amountOfBookedNights > 0) newBooking.EndDate = newBooking.StartDate.AddDays(amountOfBookedNights);
 
-            List<DateTime> newBookingTotalNights = new List<DateTime>();
+            List<DateTime> newBookingAllDates = new List<DateTime>();
             for (var dt = newBooking.StartDate; dt <= newBooking.EndDate; dt = dt.AddDays(1))
-            {
-                newBookingTotalNights.Add(dt);
-            }
+                newBookingAllDates.Add(dt);
 
+            List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates);
 
+            var roomIsAvailable = bookingController.DisplayAllVacantRooms(availableRooms);
+
+            if (!roomIsAvailable)
+                Menu.BookingMenu();
+
+            var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
+            Customer customerToBook = new Customer();
+
+            var selectionMenuLimit = 0;
+            var selection = 0;
 
             while (true)
             {
                 Console.Clear();
                 Console.WriteLine("1) Välj kund för att skapa bokning");
                 Console.WriteLine("2) Registrera ny kund");
-                Console.WriteLine("0) Gå tillbaka");
+                Console.WriteLine("0) Avbryt bokning");
 
-                var selectionMenuLimit = 2;
-                var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+                 selectionMenuLimit = 2;
+                 selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
                 var customerController = new CustomerController(dbContext);
-                Customer customer;
+                
 
                 switch (selection)
                 {
                     case 1:
                         var read = new Read(dbContext);
                         read.ReadAllCustomers();
-                        customer = customerController.ChooseCustomer();
+                        customerToBook = customerController.ChooseCustomer();
                         break;
 
                     case 2:
                         CreateNewCustomer();
                         continue;
+                    case 0:
+                        Menu.MainMenu();
+                        break;
                 }
 
                 break;
             }
+
+            newBooking.Room = roomToBook;
+            newBooking.Customer = customerToBook;
+
+            bookingController.DisplayBookingDetails(newBooking);
+
+            Console.WriteLine($"{Environment.NewLine}Vill du bekräfta bokningen?");
+            Console.WriteLine("1) Bekräfta bokning");
+            Console.WriteLine("0) Avbryt bokning");
+
+             selectionMenuLimit = 1;
+             selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+
+             switch (selection)
+             {
+                case 1:
+                    dbContext.Add(newBooking);
+                    dbContext.SaveChanges();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Clear();
+                    Console.WriteLine(" Bokning lyckades!");
+                    Console.WriteLine(" ==============================================================================");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("\n Tryck på enter för att gå tillbaka till menyn");
+                    Console.ReadLine();
+                    break;
+
+                case 0:
+                    Console.WriteLine("Bokning avbruten.");
+                    Console.WriteLine("\n Tryck på enter för att gå tillbaka till menyn");
+                    Console.ReadLine();
+                    break;
+             }
 
         }
 

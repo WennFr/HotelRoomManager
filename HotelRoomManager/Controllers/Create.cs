@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.ConstrainedExecution;
+using HotelRoomManager.CustomerControllers;
 using HotelRoomManager.Menus;
 using HotelRoomManager.Messages;
 
@@ -56,48 +57,6 @@ namespace HotelRoomManager.Controllers
             Message.PressEnterToReturnToMenu();
         }
 
-        public void CreateNewCustomer()
-        {
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("Registrera ny kund");
-                Console.WriteLine("==================");
-                var customerController = new CustomerController(dbContext);
-                try
-                {
-                    Console.WriteLine($"{Environment.NewLine}Välj titel:");
-                    var salutationInput = customerController.ControlCustomerSalutation();
-                    Console.WriteLine($"{Environment.NewLine}Förnamn:");
-                    var firstName = Console.ReadLine();
-                    Console.WriteLine($"{Environment.NewLine}Efternamn:");
-                    var lastName = Console.ReadLine();
-                    Console.WriteLine($"{Environment.NewLine}Adress:");
-                    var address = Console.ReadLine();
-                    Console.WriteLine($"{Environment.NewLine}Telefon:");
-                    var phone = Console.ReadLine();
-
-                    dbContext.Customers.Add(new Customer()
-                    {
-                        FirstName = firstName,
-                        LastName = lastName,
-                        Address = address,
-                        Phone = phone,
-                        Salutation = salutationInput
-                    });
-                    dbContext.SaveChanges();
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    Message.WrongInput();
-                    continue;
-                }
-
-            }
-            Console.WriteLine($"{Environment.NewLine}Ny kund registrerad.");
-            Message.PressEnterToReturnToMenu();
-        }
 
         public void CreateNewBooking()
         {
@@ -149,13 +108,14 @@ namespace HotelRoomManager.Controllers
                 switch (selection)
                 {
                     case 1:
-                        var read = new Read(dbContext);
-                        read.ReadAllCustomers();
+                        var readCustomers = new ReadCustomer(dbContext);
+                        readCustomers.ReadAllCustomers();
                         customerToBook = customerController.ChooseCustomer();
                         break;
 
                     case 2:
-                        CreateNewCustomer();
+                        var createCustomer = new CreateCustomer(dbContext);
+                        createCustomer.Create();
                         continue;
 
                     default:

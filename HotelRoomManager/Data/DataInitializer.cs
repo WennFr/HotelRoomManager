@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using HotelRoomManager.Controllers;
+using HotelRoomManager.CustomerControllers;
 using Microsoft.EntityFrameworkCore;
 using static HotelRoomManager.Data.Room;
 

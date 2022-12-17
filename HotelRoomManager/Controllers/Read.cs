@@ -17,15 +17,6 @@ namespace HotelRoomManager.Controllers
         }
 
 
-        public void ReadAllCustomers()
-        {
-            Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
-            foreach (var customer in dbContext.Customers.Include(s=> s.Salutation))
-            {
-                Console.WriteLine($"{customer.Id} |{customer.Salutation.SalutationType} {customer.FirstName} {customer.LastName}/{customer.Address}/{customer.Phone}");
-                Console.WriteLine($"--|-------------------------------------------------------");
-            }
-        }
         public void ReadAllRooms()
         {
             Console.WriteLine($"{Environment.NewLine}ID|Floor|Type|Size|Tillåtna extrasängar {Environment.NewLine}");

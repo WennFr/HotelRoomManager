@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelRoomManager.Messages;
 
-namespace HotelRoomManager.Controllers
+namespace HotelRoomManager.CustomerControllers
 {
     public class CustomerController
     {

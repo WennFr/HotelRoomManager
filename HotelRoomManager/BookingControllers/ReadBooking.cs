@@ -18,12 +18,8 @@ namespace HotelRoomManager.BookingControllers
             dbContext = context;
         }
 
-
         public void ReadAllBookings()
         {
-            Console.Clear();
-            Console.WriteLine("Visa bokningar");
-            Console.WriteLine("==============");
             Console.WriteLine($"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
             foreach (var booking in dbContext.Bookings
                          .Include(b => b.Customer)
@@ -35,7 +31,6 @@ namespace HotelRoomManager.BookingControllers
                 Console.WriteLine($"------------------------------------------------------------------------------");
             }
 
-            Message.PressEnterToReturnToMenu();
 
         }
 

@@ -51,7 +51,11 @@ public static class MenuSelection
                 break;
             case 3:
                 var readBooking = new ReadBooking(dbContext);
+                Console.Clear();
+                Console.WriteLine("Visa bokningar");
+                Console.WriteLine("==============");
                 readBooking.ReadAllBookings();
+                Message.PressEnterToReturnToMenu();
                 break;
             case 4:
                 var deleteBooking = new DeleteBooking(dbContext);

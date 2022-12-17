@@ -60,6 +60,7 @@ namespace HotelRoomManager.CustomerControllers
 
             while (true)
             {
+                Console.WriteLine(">");
                 if (int.TryParse(Console.ReadLine(), out intSelection) &&
                     dbContext.Customers.Any(c => c.Id == intSelection))
                 {

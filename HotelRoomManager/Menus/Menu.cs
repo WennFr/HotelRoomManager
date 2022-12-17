@@ -92,14 +92,24 @@ namespace HotelRoomManager.Menus
 
         }
 
-
         public static void UpdateRoomSelectionMenu()
         {
-
             Console.WriteLine("1) Våning");
             Console.WriteLine("2) Rumstyp & Storlek");
             Console.WriteLine("0) Spara och gå tillbaka");
+        }
+
+        public static void UpdateBookingSelectionMenu()
+        {
+
+            Console.WriteLine("1) Kund");
+            Console.WriteLine("2) Rum");
+            Console.WriteLine("0) Spara och gå tillbaka");
 
         }
+
+
+
+
     }
 }

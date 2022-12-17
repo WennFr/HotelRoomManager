@@ -11,7 +11,6 @@ namespace HotelRoomManager.BookingControllers
 {
     public class BookingController
     {
-
         public ApplicationDbContext dbContext { get; set; }
         public BookingController(ApplicationDbContext context)
         {
@@ -169,6 +168,28 @@ namespace HotelRoomManager.BookingControllers
                               $"\t{newBooking.Customer.FirstName} {newBooking.Customer.LastName}\t ID:{newBooking.Room.Id} Typ:{newBooking.Room.Type} Extrasängar:{newBooking.Room.ExtraBed}");
 
         }
+
+        public Booking ChooseBooking()
+        {
+            int intSelection;
+            Console.WriteLine($"Välj Id på den bokning du vill välja:");
+
+            while (true)
+            {
+                Console.Write(">");
+                if (int.TryParse(Console.ReadLine(), out intSelection) &&
+                    dbContext.Bookings.Any(b => b.Id == intSelection))
+                {
+                    var booking = dbContext.Bookings.FirstOrDefault(b => b.Id == intSelection);
+                    Console.Clear();
+                    return booking;
+                }
+
+                Message.ChooseBetweenAvailableMenuNumbers();
+            }
+
+        }
+
 
 
 

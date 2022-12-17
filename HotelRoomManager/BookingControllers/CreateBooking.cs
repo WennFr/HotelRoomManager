@@ -46,77 +46,82 @@ namespace HotelRoomManager.BookingControllers
             if (!roomIsAvailable)
             {
                 Message.PressEnterToReturnToMenu();
-                Menu.BookingMenu();
             }
 
-            var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
-            Customer customerToBook = new Customer();
-
-            var selectionMenuLimit = 0;
-            var selection = 0;
-
-            while (true)
+            else
             {
-                Console.Clear();
-                Console.WriteLine("1) Välj kund för att skapa bokning");
-                Console.WriteLine("2) Registrera ny kund");
+                var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
+                Customer customerToBook = new Customer();
 
-                selectionMenuLimit = 2;
+                var selectionMenuLimit = 0;
+                var selection = 0;
+
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("1) Välj kund för att skapa bokning");
+                    Console.WriteLine("2) Registrera ny kund");
+
+                    selectionMenuLimit = 2;
+                    selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+
+                    var customerController = new CustomerController(dbContext);
+
+
+                    switch (selection)
+                    {
+                        case 1:
+                            var readCustomers = new ReadCustomer(dbContext);
+                            readCustomers.ReadAllCustomers();
+                            customerToBook = customerController.ChooseCustomer();
+                            break;
+
+                        case 2:
+                            var createCustomer = new CreateCustomer(dbContext);
+                            createCustomer.Create();
+                            continue;
+
+                        default:
+                            Message.ChooseBetweenAvailableMenuNumbers();
+                            continue;
+                    }
+
+                    break;
+                }
+
+                newBooking.Room = roomToBook;
+                newBooking.Customer = customerToBook;
+
+                bookingController.DisplayBookingDetails(newBooking);
+
+                Console.WriteLine($"{Environment.NewLine}Vill du bekräfta bokningen?");
+                Console.WriteLine("1) Bekräfta bokning");
+                Console.WriteLine("0) Avbryt bokning");
+
+                selectionMenuLimit = 1;
                 selection = MenuSelection.ValidateSelection(selectionMenuLimit);
-
-                var customerController = new CustomerController(dbContext);
-
 
                 switch (selection)
                 {
                     case 1:
-                        var readCustomers = new ReadCustomer(dbContext);
-                        readCustomers.ReadAllCustomers();
-                        customerToBook = customerController.ChooseCustomer();
+                        dbContext.Add(newBooking);
+                        dbContext.SaveChanges();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Clear();
+                        Console.WriteLine("Bokningen lyckades!");
+                        Console.WriteLine(
+                            "==============================================================================");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Message.PressEnterToReturnToMenu();
                         break;
 
-                    case 2:
-                        var createCustomer = new CreateCustomer(dbContext);
-                        createCustomer.Create();
-                        continue;
-
-                    default:
-                        Message.ChooseBetweenAvailableMenuNumbers();
-                        continue;
+                    case 0:
+                        Console.WriteLine("Bokningen är avbruten.");
+                        Message.PressEnterToReturnToMenu();
+                        break;
                 }
 
-                break;
-            }
 
-            newBooking.Room = roomToBook;
-            newBooking.Customer = customerToBook;
-
-            bookingController.DisplayBookingDetails(newBooking);
-
-            Console.WriteLine($"{Environment.NewLine}Vill du bekräfta bokningen?");
-            Console.WriteLine("1) Bekräfta bokning");
-            Console.WriteLine("0) Avbryt bokning");
-
-            selectionMenuLimit = 1;
-            selection = MenuSelection.ValidateSelection(selectionMenuLimit);
-
-            switch (selection)
-            {
-                case 1:
-                    dbContext.Add(newBooking);
-                    dbContext.SaveChanges();
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Clear();
-                    Console.WriteLine("Bokningen lyckades!");
-                    Console.WriteLine("==============================================================================");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Message.PressEnterToReturnToMenu();
-                    break;
-
-                case 0:
-                    Console.WriteLine("Bokningen är avbruten.");
-                    Message.PressEnterToReturnToMenu();
-                    break;
             }
 
         }

@@ -23,26 +23,43 @@ namespace HotelRoomManager.CustomerControllers
 
             readCustomers.ReadAllCustomers();
             var customerToDelete = customerController.ChooseCustomer();
-            Console.WriteLine($"Kund: {customerToDelete.Id} {customerToDelete.FirstName} {customerToDelete.LastName} {Environment.NewLine}");
 
+            var isCustomerBooked = customerController.CheckIfCustomerIsBooked(customerToDelete);
 
-            while (true)
+            if (isCustomerBooked)
             {
-                Console.WriteLine($"Är du säker på att du vill ta bort den här kunden? y/n");
-                var selection = Console.ReadLine();
-
-                if (selection.ToLower() == "n" || selection.ToLower() == "no")
-                    break;
-
-                else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
-                {
-                    dbContext.Customers.Remove(customerToDelete);
-                    dbContext.SaveChanges();
-                    Console.WriteLine($"Kund raderad.{Environment.NewLine}");
-                    Message.PressEnterToReturnToMenu();
-                    break;
-                }
+                Console.WriteLine("Kunden som har valts har en pågående bokning. Kunden går inte att radera så länge bokningen är aktiv. ");
+                Message.PressEnterToReturnToMenu();
             }
+
+            else
+            {
+                Console.WriteLine(
+                    $"Kund: {customerToDelete.Id} {customerToDelete.FirstName} {customerToDelete.LastName} {Environment.NewLine}");
+
+
+                while (true)
+                {
+                    Console.WriteLine($"Är du säker på att du vill ta bort den här kunden? y/n");
+                    var selection = Console.ReadLine();
+
+                    if (selection.ToLower() == "n" || selection.ToLower() == "no")
+                        break;
+
+                    else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
+                    {
+                        dbContext.Customers.Remove(customerToDelete);
+                        dbContext.SaveChanges();
+                        Console.WriteLine($"Kund raderad.{Environment.NewLine}");
+                        Message.PressEnterToReturnToMenu();
+                        break;
+                    }
+                }
+
+
+            }
+
+
 
         }
 

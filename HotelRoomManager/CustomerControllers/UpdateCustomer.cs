@@ -1,5 +1,4 @@
-﻿using HotelRoomManager.Controllers;
-using HotelRoomManager.Data;
+﻿using HotelRoomManager.Data;
 using HotelRoomManager.Menus;
 using HotelRoomManager.Messages;
 using System;

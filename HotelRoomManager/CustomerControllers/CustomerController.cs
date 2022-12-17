@@ -75,6 +75,20 @@ namespace HotelRoomManager.CustomerControllers
 
 
 
+        public bool CheckIfCustomerIsBooked(Customer customerToDelete)
+        {
+            foreach (var booking in dbContext.Bookings.Include(b=> b.Customer).Where(b=> b.Customer == customerToDelete))
+            {
+                if (booking.Customer == customerToDelete);
+                return true;
+
+            }
+
+            return false;
+
+
+        }
+
 
 
 

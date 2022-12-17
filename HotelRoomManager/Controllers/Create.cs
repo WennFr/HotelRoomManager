@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HotelRoomManager.View;
 using System.Runtime.ConstrainedExecution;
+using HotelRoomManager.Menus;
+using HotelRoomManager.Messages;
 
 namespace HotelRoomManager.Controllers
 {
@@ -47,15 +48,12 @@ namespace HotelRoomManager.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //skapa message class
-                    Console.WriteLine($"{Environment.NewLine}Felaktig inmatning, försök igen.");
-                    Console.WriteLine($"{Environment.NewLine}Tryck på enter för starta om.");
-                    Console.ReadKey();
+                    Message.WrongInput();
+                    continue;
                 }
             }
             Console.WriteLine($"{Environment.NewLine}Nytt rum registrerat.");
-            Console.WriteLine($"{Environment.NewLine}Tryck på enter för att gå tillbaka till menyn.");
-            Console.ReadKey();
+            Message.PressEnterToReturnToMenu();
         }
 
         public void CreateNewCustomer()
@@ -92,16 +90,13 @@ namespace HotelRoomManager.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //skapa message class
-                    Console.WriteLine($"{Environment.NewLine}Felaktig inmatning, försök igen.");
-                    Console.WriteLine($"{Environment.NewLine}Tryck på enter för starta om.");
-                    Console.ReadKey();
+                    Message.WrongInput();
+                    continue;
                 }
 
             }
             Console.WriteLine($"{Environment.NewLine}Ny kund registrerad.");
-            Console.WriteLine($"{Environment.NewLine}Tryck på enter för att gå tillbaka till menyn.");
-            Console.ReadKey();
+            Message.PressEnterToReturnToMenu();
         }
 
         public void CreateNewBooking()
@@ -109,7 +104,7 @@ namespace HotelRoomManager.Controllers
             Console.Clear();
             Console.WriteLine($"Ny Bokning");
             Console.WriteLine($"========== {Environment.NewLine}");
-            
+
             var newBooking = new Booking();
             var bookingController = new BookingController(dbContext);
 
@@ -123,12 +118,15 @@ namespace HotelRoomManager.Controllers
             for (var dt = newBooking.StartDate; dt <= newBooking.EndDate; dt = dt.AddDays(1))
                 newBookingAllDates.Add(dt);
 
-            List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates,totalAmountOfGuests);
+            List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates, totalAmountOfGuests);
 
             var roomIsAvailable = bookingController.DisplayAllVacantRooms(availableRooms);
 
             if (!roomIsAvailable)
+            {
+                Message.PressEnterToReturnToMenu();
                 Menu.BookingMenu();
+            }
 
             var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
             Customer customerToBook = new Customer();
@@ -141,12 +139,12 @@ namespace HotelRoomManager.Controllers
                 Console.Clear();
                 Console.WriteLine("1) Välj kund för att skapa bokning");
                 Console.WriteLine("2) Registrera ny kund");
-                
-                 selectionMenuLimit = 2;
-                 selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+
+                selectionMenuLimit = 2;
+                selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
                 var customerController = new CustomerController(dbContext);
-                
+
 
                 switch (selection)
                 {
@@ -161,6 +159,7 @@ namespace HotelRoomManager.Controllers
                         continue;
 
                     default:
+                        Message.ChooseBetweenAvailableMenuNumbers();
                         continue;
                 }
 
@@ -176,29 +175,27 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine("1) Bekräfta bokning");
             Console.WriteLine("0) Avbryt bokning");
 
-             selectionMenuLimit = 1;
-             selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+            selectionMenuLimit = 1;
+            selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
-             switch (selection)
-             {
+            switch (selection)
+            {
                 case 1:
                     dbContext.Add(newBooking);
                     dbContext.SaveChanges();
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Clear();
-                    Console.WriteLine(" Bokningen lyckades!");
-                    Console.WriteLine(" ==============================================================================");
+                    Console.WriteLine("Bokningen lyckades!");
+                    Console.WriteLine("==============================================================================");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine("\n Tryck på enter för att gå tillbaka till menyn");
-                    Console.ReadLine();
+                    Message.PressEnterToReturnToMenu();
                     break;
 
                 case 0:
                     Console.WriteLine("Bokningen är avbruten.");
-                    Console.WriteLine("\n Tryck på enter för att gå tillbaka till menyn");
-                    Console.ReadLine();
+                    Message.PressEnterToReturnToMenu();
                     break;
-             }
+            }
 
         }
 

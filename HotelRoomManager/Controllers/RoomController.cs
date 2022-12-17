@@ -5,6 +5,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using HotelRoomManager.Data;
+using HotelRoomManager.Messages;
 
 namespace HotelRoomManager.Controllers
 {
@@ -56,7 +57,7 @@ namespace HotelRoomManager.Controllers
                     return roomSelection;
                 }
 
-                Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+                Message.ChooseBetweenAvailableMenuNumbers();
             }
 
         }

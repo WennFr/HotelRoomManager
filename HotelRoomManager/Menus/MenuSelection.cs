@@ -1,7 +1,8 @@
 ﻿using HotelRoomManager.Controllers;
 using HotelRoomManager.Data;
+using HotelRoomManager.Messages;
 
-namespace HotelRoomManager.View;
+namespace HotelRoomManager.Menus;
 
 public static class MenuSelection
 {
@@ -95,6 +96,9 @@ public static class MenuSelection
 
         Menu.MainMenu();
     }
+
+
+
     public static int ValidateSelection(int selectionMenuLimit)
     {
         int intSelection;
@@ -105,7 +109,7 @@ public static class MenuSelection
             if (int.TryParse(Console.ReadLine(), out intSelection) && intSelection >= 0 && intSelection <= selectionMenuLimit)
                 return intSelection;
 
-            Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+            Message.ChooseBetweenAvailableMenuNumbers();
         }
     }
 }

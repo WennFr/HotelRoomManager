@@ -1,10 +1,11 @@
 ﻿using HotelRoomManager.Data;
-using HotelRoomManager.View;
+using HotelRoomManager.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelRoomManager.Messages;
 
 namespace HotelRoomManager.Controllers
 {
@@ -60,9 +61,8 @@ namespace HotelRoomManager.Controllers
                 {
                     dbContext.Customers.Remove(customerToDelete);
                     dbContext.SaveChanges();
-                    Console.WriteLine("Kund raderad.");
-                    Console.WriteLine($"{Environment.NewLine}Tryck på enter för att fortsätta.");
-                    Console.ReadKey();
+                    Console.WriteLine($"Kund raderad.{Environment.NewLine}");
+                    Message.PressEnterToReturnToMenu();
                     break;
                 }
 

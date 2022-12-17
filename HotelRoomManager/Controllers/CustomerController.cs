@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelRoomManager.Messages;
 
 namespace HotelRoomManager.Controllers
 {
@@ -34,7 +35,8 @@ namespace HotelRoomManager.Controllers
                     return salutation;
                 }
 
-                Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+                Message.ChooseBetweenAvailableMenuNumbers();
+
             }
 
         }
@@ -66,7 +68,7 @@ namespace HotelRoomManager.Controllers
                     return customer;
                 }
 
-                Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+                Message.ChooseBetweenAvailableMenuNumbers();
             }
 
         }

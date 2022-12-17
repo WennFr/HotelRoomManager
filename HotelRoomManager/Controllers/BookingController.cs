@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelRoomManager.Messages;
 
 namespace HotelRoomManager.Controllers
 {
@@ -65,7 +66,7 @@ namespace HotelRoomManager.Controllers
             }
         }
 
-        public List<Room> GetAllVacantRooms(List<DateTime>newBookingAllDates,int totalAmountOfGuests)
+        public List<Room> GetAllVacantRooms(List<DateTime> newBookingAllDates, int totalAmountOfGuests)
         {
             var availableRooms = new List<Room>();
 
@@ -77,7 +78,7 @@ namespace HotelRoomManager.Controllers
                 {
                     for (var dt = booking.StartDate; dt <= booking.EndDate; dt = dt.AddDays(1))
                     {
-                        if (newBookingAllDates.Contains(dt) || 
+                        if (newBookingAllDates.Contains(dt) ||
                             booking.Room.Type == Convert.ToString(Room.RoomType.Single) && totalAmountOfGuests > 1 ||
                             booking.Room.Type == Convert.ToString(Room.RoomType.Double) && booking.Room.ExtraBed == 1 && totalAmountOfGuests == 4)
                         {
@@ -117,8 +118,6 @@ namespace HotelRoomManager.Controllers
                 Console.WriteLine("\n\n Det finns inga lediga rum på valt datum. Ändra datum eller antal gäster ");
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.WriteLine("Tryck på enter för att gå tillbaka till menyn.");
-                Console.ReadLine();
                 return false;
             }
             else
@@ -132,7 +131,7 @@ namespace HotelRoomManager.Controllers
                     Console.WriteLine($"{room.Id} |{room.Floor} |{room.Type}/{room.Size}/{room.ExtraBed}");
                     Console.WriteLine($"--|--|----------------------------------------------------");
 
-                   
+
                 }
                 return true;
             }
@@ -153,7 +152,7 @@ namespace HotelRoomManager.Controllers
                     return roomSelection;
                 }
 
-                Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
+                Message.ChooseBetweenAvailableMenuNumbers();
             }
 
         }

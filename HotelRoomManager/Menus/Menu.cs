@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
 
-namespace HotelRoomManager.View
+namespace HotelRoomManager.Menus
 {
     public static class Menu
     {
@@ -73,6 +73,8 @@ namespace HotelRoomManager.View
             Console.WriteLine("2) Radera kund");
             Console.WriteLine("3) Radera bokning");
             Console.WriteLine("0) Gå tillbaka");
+
+
 
 
         }

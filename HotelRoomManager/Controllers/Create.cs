@@ -109,7 +109,7 @@ namespace HotelRoomManager.Controllers
             Console.Clear();
             Console.WriteLine($"Ny Bokning");
             Console.WriteLine($"========== {Environment.NewLine}");
-
+            
             var newBooking = new Booking();
             var bookingController = new BookingController(dbContext);
 
@@ -123,7 +123,7 @@ namespace HotelRoomManager.Controllers
             for (var dt = newBooking.StartDate; dt <= newBooking.EndDate; dt = dt.AddDays(1))
                 newBookingAllDates.Add(dt);
 
-            List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates);
+            List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates,totalAmountOfGuests);
 
             var roomIsAvailable = bookingController.DisplayAllVacantRooms(availableRooms);
 
@@ -141,8 +141,7 @@ namespace HotelRoomManager.Controllers
                 Console.Clear();
                 Console.WriteLine("1) Välj kund för att skapa bokning");
                 Console.WriteLine("2) Registrera ny kund");
-                Console.WriteLine("0) Avbryt bokning");
-
+                
                  selectionMenuLimit = 2;
                  selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
@@ -160,9 +159,9 @@ namespace HotelRoomManager.Controllers
                     case 2:
                         CreateNewCustomer();
                         continue;
-                    case 0:
-                        Menu.MainMenu();
-                        break;
+
+                    default:
+                        continue;
                 }
 
                 break;
@@ -187,7 +186,7 @@ namespace HotelRoomManager.Controllers
                     dbContext.SaveChanges();
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Clear();
-                    Console.WriteLine(" Bokning lyckades!");
+                    Console.WriteLine(" Bokningen lyckades!");
                     Console.WriteLine(" ==============================================================================");
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine("\n Tryck på enter för att gå tillbaka till menyn");
@@ -195,7 +194,7 @@ namespace HotelRoomManager.Controllers
                     break;
 
                 case 0:
-                    Console.WriteLine("Bokning avbruten.");
+                    Console.WriteLine("Bokningen är avbruten.");
                     Console.WriteLine("\n Tryck på enter för att gå tillbaka till menyn");
                     Console.ReadLine();
                     break;

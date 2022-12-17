@@ -32,7 +32,6 @@ namespace HotelRoomManager.Controllers
 
         }
 
-
         public DateTime SelectStartDate()
         {
             Console.Clear();
@@ -51,26 +50,24 @@ namespace HotelRoomManager.Controllers
 
 
         }
-
         public int SelectAmountOfNights()
         {
             Console.Clear();
             int amountOfNights;
-            Console.WriteLine("Hur många nätter att boka?");
+            Console.WriteLine("Hur många nätter ska bokas?");
             while (true)
             {
                 Console.Write(">");
-                if (int.TryParse(Console.ReadLine(), out amountOfNights))
+                if (int.TryParse(Console.ReadLine(), out amountOfNights) && amountOfNights > 0)
                     return amountOfNights;
 
-                Console.WriteLine("Du måste skriva in en siffra");
+                Console.WriteLine("Ett rum måste bokas för minst en natt. Skriv in en siffra för antal nätter.");
             }
         }
 
-
-        public List<Room> GetAllVacantRooms(List<DateTime>newBookingAllDates)
+        public List<Room> GetAllVacantRooms(List<DateTime>newBookingAllDates,int totalAmountOfGuests)
         {
-            List<Room> availableRooms = new List<Room>();
+            var availableRooms = new List<Room>();
 
             foreach (var room in dbContext.Rooms.ToList())
             {
@@ -80,7 +77,9 @@ namespace HotelRoomManager.Controllers
                 {
                     for (var dt = booking.StartDate; dt <= booking.EndDate; dt = dt.AddDays(1))
                     {
-                        if (newBookingAllDates.Contains(dt))
+                        if (newBookingAllDates.Contains(dt) || 
+                            booking.Room.Type == Convert.ToString(Room.RoomType.Single) && totalAmountOfGuests > 1 ||
+                            booking.Room.Type == Convert.ToString(Room.RoomType.Double) && booking.Room.ExtraBed == 1 && totalAmountOfGuests == 4)
                         {
                             roomIsVacant = false;
                         }
@@ -92,8 +91,15 @@ namespace HotelRoomManager.Controllers
                     }
                 }
 
-                // finally if the car is free we can add it to our list of available cars
-                if (roomIsVacant)
+
+                if (roomIsVacant && room.Type == Convert.ToString(Room.RoomType.Single) && totalAmountOfGuests > 1 ||
+                    roomIsVacant && room.Type == Convert.ToString(Room.RoomType.Double) && room.ExtraBed == 1 && totalAmountOfGuests == 4)
+                {
+                    roomIsVacant = false;
+                }
+
+
+                else if (roomIsVacant)
                 {
                     availableRooms.Add(room);
                 }
@@ -162,8 +168,6 @@ namespace HotelRoomManager.Controllers
             Console.WriteLine(" Från\t\tTill\t\tKund\t\tRum");
             Console.WriteLine($" {newBooking.StartDate.ToShortDateString()}\t{newBooking.EndDate.ToShortDateString()}" +
                               $"\t{newBooking.Customer.FirstName} {newBooking.Customer.LastName}\t ID:{newBooking.Room.Id} Typ:{newBooking.Room.Type} Extrasängar:{newBooking.Room.ExtraBed}");
-
-
 
         }
 

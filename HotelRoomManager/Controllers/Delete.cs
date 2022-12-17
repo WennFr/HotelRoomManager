@@ -17,28 +17,6 @@ namespace HotelRoomManager.Controllers
             dbContext = context;
         }
 
-        public void DeleteEntitySelection()
-        {
-            Menu.DeleteSelectionMenu();
-            var selectionMenuLimit = 3;
-            var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
-
-            switch (selection)
-            {
-                case 1:
-                    DeleteRoom();
-                    break;
-                case 2:
-                    DeleteCustomer();
-                    break;
-                case 3:
-                    DeleteBooking();
-                    break;
-                case 0:
-                    break;
-            }
-        }
-
         public void DeleteCustomer()
         {
             var read = new Read(dbContext);

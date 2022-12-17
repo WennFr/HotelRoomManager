@@ -89,12 +89,38 @@ public static class MenuSelection
                 update.UpdateBooking();
                 break;
             case 4:
-                delete.DeleteEntitySelection();
+                Menu.DeleteEntitySelectionMenu();
                 break;
 
         }
 
         Menu.MainMenu();
+    }
+
+
+    public static void DeleteEntity()
+    {
+        var selectionMenuLimit = 3;
+        var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+        var delete = new Delete(dbContext);
+
+        switch (selection)
+        {
+            case 1:
+                delete.DeleteRoom();
+                break;
+            case 2:
+                delete.DeleteCustomer();
+                break;
+            case 3:
+                delete.DeleteBooking();
+                break;
+            
+        }
+
+
+
+
     }
 
 

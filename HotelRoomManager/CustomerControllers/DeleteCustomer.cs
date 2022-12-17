@@ -18,6 +18,11 @@ namespace HotelRoomManager.CustomerControllers
 
         public void Delete()
         {
+            Console.Clear();
+            Console.WriteLine("Radera Kund");
+            Console.WriteLine("===========");
+
+
             var readCustomers = new ReadCustomer(dbContext);
             var customerController = new CustomerController(dbContext);
 
@@ -34,9 +39,8 @@ namespace HotelRoomManager.CustomerControllers
 
             else
             {
-                Console.WriteLine(
-                    $"Kund: {customerToDelete.Id} {customerToDelete.FirstName} {customerToDelete.LastName} {Environment.NewLine}");
-
+                Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
+                Console.WriteLine($"Kund: {customerToDelete.Id} |{customerToDelete.Salutation.SalutationType} {customerToDelete.FirstName} {customerToDelete.LastName}/{customerToDelete.Address}/{customerToDelete.Phone} {Environment.NewLine}");
 
                 while (true)
                 {

@@ -33,7 +33,8 @@ namespace HotelRoomManager.Menus
             Console.WriteLine($"Bokningar {Environment.NewLine}");
             Console.WriteLine("1) Boka rum");
             Console.WriteLine("2) Ändra en bokning");
-            Console.WriteLine("3) Sök på datum efter lediga rum");
+            Console.WriteLine("3) Visa bokningar");
+            Console.WriteLine("4) Avboka");
             Console.WriteLine("0) Gå tillbaka");
 
             MenuSelection.Booking();
@@ -71,7 +72,7 @@ namespace HotelRoomManager.Menus
             Console.WriteLine($"=================== {Environment.NewLine}");
             Console.WriteLine("1) Radera rum");
             Console.WriteLine("2) Radera kund");
-            Console.WriteLine("3) Radera bokning");
+            Console.WriteLine("3) Avbokning");
             Console.WriteLine("0) Gå tillbaka");
 
 

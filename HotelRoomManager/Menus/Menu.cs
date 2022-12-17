@@ -64,7 +64,7 @@ namespace HotelRoomManager.Menus
 
         }
 
-        public static void DeleteEntitySelectionMenu()
+        public static void DeleteEntityMenu()
         {
             Console.Clear();
             Console.WriteLine("Radera");

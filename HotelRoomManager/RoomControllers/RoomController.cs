@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using HotelRoomManager.Data;
 using HotelRoomManager.Messages;
 
-namespace HotelRoomManager.Controllers
+namespace HotelRoomManager.RoomControllers
 {
     public class RoomController
     {

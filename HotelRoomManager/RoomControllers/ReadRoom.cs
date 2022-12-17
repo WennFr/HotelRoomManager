@@ -1,20 +1,20 @@
 ﻿using HotelRoomManager.Data;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelRoomManager.Controllers
+namespace HotelRoomManager.RoomControllers
 {
-    public class Read
+    public class ReadRoom
     {
         public ApplicationDbContext dbContext { get; set; }
-        public Read(ApplicationDbContext context)
+        public ReadRoom(ApplicationDbContext context)
         {
             dbContext = context;
         }
+
 
 
         public void ReadAllRooms()
@@ -26,6 +26,10 @@ namespace HotelRoomManager.Controllers
                 Console.WriteLine($"--|--|----------------------------------------------------");
             }
         }
+
+
+
+
 
     }
 }

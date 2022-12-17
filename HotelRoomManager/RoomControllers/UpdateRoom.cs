@@ -5,28 +5,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HotelRoomManager.CustomerControllers;
-using HotelRoomManager.Messages;
 
-namespace HotelRoomManager.Controllers
+namespace HotelRoomManager.RoomControllers
 {
-    public class Update
+    public class UpdateRoom
     {
         public ApplicationDbContext dbContext { get; set; }
-        public Update(ApplicationDbContext context)
+        public UpdateRoom(ApplicationDbContext context)
         {
             dbContext = context;
         }
-       
-        public void UpdateRoom()
+
+        public void Update()
         {
             Console.Clear();
             Console.WriteLine("Ändra rum");
             Console.WriteLine($"=================== {Environment.NewLine}");
             var roomController = new RoomController(dbContext);
-            var read = new Read(dbContext);
+            var readRoom = new ReadRoom(dbContext);
 
-            read.ReadAllRooms();
+            readRoom.ReadAllRooms();
             var room = roomController.ChooseRoom();
 
             var isRunning = true;
@@ -64,6 +62,7 @@ namespace HotelRoomManager.Controllers
 
 
         }
+
         public int validIntSelection()
         {
             int intSelection;
@@ -78,8 +77,10 @@ namespace HotelRoomManager.Controllers
         }
 
 
-        public void UpdateBooking()
-        {
-        }
+
+
+
+
+
     }
 }

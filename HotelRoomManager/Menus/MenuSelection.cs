@@ -1,7 +1,8 @@
-﻿using HotelRoomManager.Controllers;
+﻿using HotelRoomManager.BookingControllers;
 using HotelRoomManager.CustomerControllers;
 using HotelRoomManager.Data;
 using HotelRoomManager.Messages;
+using HotelRoomManager.RoomControllers;
 
 namespace HotelRoomManager.Menus;
 
@@ -38,12 +39,11 @@ public static class MenuSelection
     {
         selMenuLimit = 3;
         selection = ValidateSelection(selMenuLimit);
-
-        var create = new Create(dbContext);
         switch (selection)
         {
             case 1:
-                create.CreateNewBooking();
+                var createBooking = new CreateBooking(dbContext);
+                createBooking.Create();
                 break;
             case 2:
                 Menu.RegistrationMenu();
@@ -59,14 +59,14 @@ public static class MenuSelection
     {
         selMenuLimit = 2;
         selection = ValidateSelection(selMenuLimit);
-        var createCustomer = new CreateCustomer(dbContext);
-        var create = new Create(dbContext);
         switch (selection)
         {
             case 1:
-                create.CreateNewRoom();
+                var createRoom = new CreateRoom(dbContext);
+                createRoom.Create();
                 break;
             case 2:
+                var createCustomer = new CreateCustomer(dbContext);
                 createCustomer.Create();
                 break;
         }
@@ -77,22 +77,22 @@ public static class MenuSelection
     {
         selMenuLimit = 4;
         selection = ValidateSelection(selMenuLimit);
-        var update = new Update(dbContext);
-        var delete = new Delete(dbContext);
         switch (selection)
         {
             case 1:
-                update.UpdateRoom();
+                var updateRoom = new UpdateRoom(dbContext);
+                updateRoom.Update();
                 break;
             case 2:
                 var updateCustomer = new UpdateCustomer(dbContext);
                 updateCustomer.Update();
                 break;
             case 3:
-                update.UpdateBooking();
+                var updateBooking = new UpdateBooking(dbContext);
+               updateBooking.Update();
                 break;
             case 4:
-                Menu.DeleteEntitySelectionMenu();
+                Menu.DeleteEntityMenu();
                 break;
 
         }
@@ -105,19 +105,20 @@ public static class MenuSelection
     {
         var selectionMenuLimit = 3;
         var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
-        var delete = new Delete(dbContext);
 
         switch (selection)
         {
             case 1:
-                delete.DeleteRoom();
+                var deleteRoom = new DeleteRoom(dbContext);
+                deleteRoom.Delete();
                 break;
             case 2:
                 var deleteCustomer = new DeleteCustomer(dbContext); 
                 deleteCustomer.Delete();
                 break;
             case 3:
-                delete.DeleteBooking();
+                var deleteBooking = new DeleteBooking(dbContext);
+                deleteBooking.Delete();
                 break;
             
         }

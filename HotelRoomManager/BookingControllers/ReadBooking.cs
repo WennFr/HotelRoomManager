@@ -28,7 +28,8 @@ namespace HotelRoomManager.BookingControllers
                          .Include(b => b.Room))
             {
                 Console.WriteLine("{0,-18} {1,-20} {2,-20} {3,-19} {4,-20}", 
-                    $"{booking.Id}", $"{booking.StartDate.ToShortDateString()}",
+                    $"{booking.Id}",
+                    $"{booking.StartDate.ToShortDateString()}",
                     $"{booking.EndDate.ToShortDateString()}", 
                     $"{booking.Customer.Salutation.SalutationType}{booking.Customer.LastName}", 
                     $"{booking.Room.Id}");

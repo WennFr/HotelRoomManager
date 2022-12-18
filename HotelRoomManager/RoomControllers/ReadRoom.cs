@@ -1,4 +1,5 @@
 ﻿using HotelRoomManager.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,23 @@ namespace HotelRoomManager.RoomControllers
 
         public void ReadAllRooms()
         {
-            Console.WriteLine($"{Environment.NewLine}ID|Floor|Type|Size|Tillåtna extrasängar {Environment.NewLine}");
+            Console.WriteLine("{0,-20} {1,-20} {2,-20} {3,-20}{4,-20}", $"{Environment.NewLine}RumsID", "Rumstyp", "Våning", "Storlek", $"Möjligt antal extrasängar {Environment.NewLine}");
             foreach (var room in dbContext.Rooms)
             {
-                Console.WriteLine($"{room.Id} |{room.Floor} |{room.Type}/{room.Size}/{room.ExtraBed}");
-                Console.WriteLine($"--|--|----------------------------------------------------");
+                Console.WriteLine("{0,-18} {1,-20} {2,-20} {3,-19} {4,-20}",
+                    $"{room.Id}", 
+                    $"{room.Type}",
+                    $"{room.Floor}",
+                    $"{room.Size}kvm",
+                    $"{room.ExtraBed}");
+                Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
             }
+
+
+
+
+
+
         }
 
 

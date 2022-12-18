@@ -34,7 +34,7 @@ namespace HotelRoomManager.BookingControllers
 
             if (!isAnyRegisteredBooking)
             {
-                Message.NoCurrentBookings();
+                Message.NoRegisteredBookings();
                 Message.PressEnterToReturnToMenu();
             }
 

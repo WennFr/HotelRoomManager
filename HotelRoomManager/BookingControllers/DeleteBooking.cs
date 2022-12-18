@@ -31,13 +31,12 @@ namespace HotelRoomManager.BookingControllers
 
             if (!isAnyRegisteredBooking)
             {
-                Message.NoCurrentBookings();
+                Message.NoRegisteredBookings();
                 Message.PressEnterToReturnToMenu();
             }
 
             else
             {
-
                 var bookingToDelete = bookingController.ChooseBooking();
 
                 Console.Clear();
@@ -49,8 +48,9 @@ namespace HotelRoomManager.BookingControllers
 
                 while (true)
                 {
-                    Console.WriteLine(
-                        $"{Environment.NewLine}Är du säker på att du vill ta bort den här bokningen? y/n");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{Environment.NewLine}Är du säker på att du vill ta bort den här bokningen? y/n");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.Write(">");
                     var selection = Console.ReadLine();
 

@@ -26,44 +26,57 @@ namespace HotelRoomManager.CustomerControllers
             var readCustomers = new ReadCustomer(dbContext);
             var customerController = new CustomerController(dbContext);
 
-            readCustomers.ReadAllCustomers();
-            var customerToDelete = customerController.ChooseCustomer();
+            var isAnyRegisteredCustomer = readCustomers.ReadAllCustomers();
 
-            var isCustomerBooked = customerController.CheckIfCustomerIsBooked(customerToDelete);
-
-            if (isCustomerBooked)
+            if (!isAnyRegisteredCustomer)
             {
-                Console.WriteLine("Kunden som har valts har en pågående bokning. Kunden går inte att radera så länge bokningen är aktiv. ");
+                Message.NoRegisteredCustomers();
                 Message.PressEnterToReturnToMenu();
+
             }
 
             else
             {
-                Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
-                Console.WriteLine($"Kund: {customerToDelete.Id} |{customerToDelete.Salutation.SalutationType} {customerToDelete.FirstName} {customerToDelete.LastName}/{customerToDelete.Address}/{customerToDelete.Phone} {Environment.NewLine}");
+                var customerToDelete = customerController.ChooseCustomer();
+                var isCustomerBooked = customerController.CheckIfCustomerIsBooked(customerToDelete);
 
-                while (true)
+                if (isCustomerBooked)
                 {
-                    Console.WriteLine($"Är du säker på att du vill ta bort den här kunden? y/n");
-                    var selection = Console.ReadLine();
-
-                    if (selection.ToLower() == "n" || selection.ToLower() == "no")
-                        break;
-
-                    else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
-                    {
-                        dbContext.Customers.Remove(customerToDelete);
-                        dbContext.SaveChanges();
-                        Console.WriteLine($"Kund raderad.{Environment.NewLine}");
-                        Message.PressEnterToReturnToMenu();
-                        break;
-                    }
+                    Message.CustomerIsBooked();
+                    Message.PressEnterToReturnToMenu();
                 }
 
+                else
+                {
+                    Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
+                    Console.WriteLine(
+                        $"Kund: {customerToDelete.Id} |{customerToDelete.Salutation.SalutationType} {customerToDelete.FirstName} {customerToDelete.LastName}/{customerToDelete.Address}/{customerToDelete.Phone} {Environment.NewLine}");
+
+                    while (true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Är du säker på att du vill ta bort den här kunden? y/n");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.Write(">");
+                        var selection = Console.ReadLine();
+
+                        if (selection.ToLower() == "n" || selection.ToLower() == "no")
+                            break;
+
+                        else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
+                        {
+                            dbContext.Customers.Remove(customerToDelete);
+                            dbContext.SaveChanges();
+                            Console.WriteLine($"Kund raderad.{Environment.NewLine}");
+                            Message.PressEnterToReturnToMenu();
+                            break;
+                        }
+                    }
+
+
+                }
 
             }
-
-
 
         }
 

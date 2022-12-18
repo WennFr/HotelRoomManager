@@ -28,8 +28,8 @@ public class DataInitializer
         SeedRooms();
         dbContext.SaveChanges();
 
-        SeedBooking();
-        dbContext.SaveChanges();
+       // SeedBooking();
+      //  dbContext.SaveChanges();
     }
 
     public void SeedSalutations()
@@ -161,29 +161,29 @@ public class DataInitializer
         }
 
     }
-    public void SeedBooking()
-    {
-        if (!dbContext.Bookings.Any(b => b.Id == 1))
-        {
-            var customer = new Customer();
-            foreach (var c in dbContext.Customers)
-                if (c.Id == 3)
-                    customer = c;
+    //public void SeedBooking()
+    //{
+    //    if (!dbContext.Bookings.Any(b => b.Id == 1))
+    //    {
+    //        var customer = new Customer();
+    //        foreach (var c in dbContext.Customers)
+    //            if (c.Id == 3)
+    //                customer = c;
 
-            var room = new Room();
-            foreach (var r in dbContext.Rooms)
-                if (r.Id == 3)
-                    room = r;
+    //        var room = new Room();
+    //        foreach (var r in dbContext.Rooms)
+    //            if (r.Id == 3)
+    //                room = r;
 
-            dbContext.Bookings.Add(new Booking()
-            {
-                StartDate = DateTime.ParseExact("2023-03-05", "yyyy-MM-dd", CultureInfo.CurrentCulture),
-                EndDate = DateTime.ParseExact("2023-03-10", "yyyy-MM-dd", CultureInfo.CurrentCulture),
-                Customer = customer,
-                Room = room
-            });
+    //        dbContext.Bookings.Add(new Booking()
+    //        {
+    //            StartDate = DateTime.ParseExact("2023-03-05", "yyyy-MM-dd", CultureInfo.CurrentCulture),
+    //            EndDate = DateTime.ParseExact("2023-03-10", "yyyy-MM-dd", CultureInfo.CurrentCulture),
+    //            Customer = customer,
+    //            Room = room
+    //        });
 
-        }
-    }
+    //    }
+    //}
 
 }

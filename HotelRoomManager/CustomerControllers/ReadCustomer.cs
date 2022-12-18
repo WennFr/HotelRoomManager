@@ -16,7 +16,7 @@ namespace HotelRoomManager.CustomerControllers
             dbContext = context;
         }
 
-        public void ReadAllCustomers()
+        public bool ReadAllCustomers()
         {
             Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
             foreach (var customer in dbContext.Customers.Include(s => s.Salutation))
@@ -24,6 +24,12 @@ namespace HotelRoomManager.CustomerControllers
                 Console.WriteLine($"{customer.Id} |{customer.Salutation.SalutationType} {customer.FirstName} {customer.LastName}/{customer.Address}/{customer.Phone}");
                 Console.WriteLine($"--|-------------------------------------------------------");
             }
+
+            if (dbContext.Customers.Count() > 0)
+                return true;
+            return false;
+
+
         }
 
 

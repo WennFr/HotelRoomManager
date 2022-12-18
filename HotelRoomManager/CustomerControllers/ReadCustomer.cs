@@ -18,17 +18,17 @@ namespace HotelRoomManager.CustomerControllers
 
         public bool ReadAllCustomers()
         {
-            Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
+            Console.WriteLine("{0,-15} {1,-30} {2,-30} {3,-20}", $"{Environment.NewLine}KundID", "Namn", "Adress", $"Telefon{Environment.NewLine}");
             foreach (var customer in dbContext.Customers.Include(s => s.Salutation))
             {
-                Console.WriteLine($"{customer.Id} |{customer.Salutation.SalutationType} {customer.FirstName} {customer.LastName}/{customer.Address}/{customer.Phone}");
-                Console.WriteLine($"--|-------------------------------------------------------");
+                Console.WriteLine("{0,-13} {1,-30} {2,-30} {3,-20}", $"{customer.Id}", $"{customer.Salutation.SalutationType}{customer.FirstName} {customer.LastName}", $"{customer.Address}", $"{customer.Phone}");
+                Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
             }
+
 
             if (dbContext.Customers.Count() > 0)
                 return true;
             return false;
-
 
         }
 

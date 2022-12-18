@@ -17,7 +17,7 @@ public static class MenuSelection
     }
     public static bool Main()
     {
-        selMenuLimit = 4;
+        selMenuLimit = 3;
         var selection = ValidateSelection(selMenuLimit);
 
         switch (selection)

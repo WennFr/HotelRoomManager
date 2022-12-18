@@ -37,7 +37,7 @@ public static class MenuSelection
     }
     public static void Booking()
     {
-        selMenuLimit = 3;
+        selMenuLimit = 4;
         selection = ValidateSelection(selMenuLimit);
         switch (selection)
         {

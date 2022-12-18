@@ -30,87 +30,101 @@ namespace HotelRoomManager.BookingControllers
             var bookingController = new BookingController(dbContext);
             var readBooking = new ReadBooking(dbContext);
 
-            readBooking.ReadAllBookings();
-            var booking = bookingController.ChooseBooking();
+            var isAnyRegisteredBooking = readBooking.ReadAllBookings();
 
-            var isRunning = true;
-            while (isRunning)
+            if (!isAnyRegisteredBooking)
             {
-                Console.Clear();
-                Console.WriteLine($"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
-                Console.WriteLine($"{booking.Id}\t\t{booking.StartDate.ToShortDateString()}\t{booking.EndDate.ToShortDateString()} " +
-                                  $"\t{booking.Customer.Salutation.SalutationType}{booking.Customer.LastName}\t{booking.Room.Id}");
-                Console.WriteLine($"{Environment.NewLine}Vad vill du ändra? {Environment.NewLine}");
-                Menu.UpdateBookingSelectionMenu();
+                Message.NoCurrentBookings();
+                Message.PressEnterToReturnToMenu();
+            }
 
-                var selectionMenuLimit = 2;
-                var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
-                switch (selection)
+            else
+            {
+                var booking = bookingController.ChooseBooking();
+                var isRunning = true;
+                while (isRunning)
                 {
-                    case 1:
-                        var customerController = new CustomerController(dbContext);
-                        var readCustomer = new ReadCustomer(dbContext);
-                        Console.Clear();
-                        readCustomer.ReadAllCustomers();
-                        var customer = customerController.ChooseCustomer();
-                        booking.Customer = customer;
-                        dbContext.SaveChanges();
-                        Console.WriteLine("Ny kund registrerad på bokningen.");
-                        break;
-                    case 2:
-                        Console.Clear();
-                        booking.StartDate = new DateTime(1995, 07, 03, 23, 59, 59);
-                        booking.EndDate = new DateTime(1995, 07, 03, 23, 59, 59);
+                    Console.Clear();
+                    Console.WriteLine(
+                        $"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
+                    Console.WriteLine(
+                        $"{booking.Id}\t\t{booking.StartDate.ToShortDateString()}\t{booking.EndDate.ToShortDateString()} " +
+                        $"\t{booking.Customer.Salutation.SalutationType}{booking.Customer.LastName}\t{booking.Room.Id}");
+                    Console.WriteLine($"{Environment.NewLine}Vad vill du ändra? {Environment.NewLine}");
+                    Menu.UpdateBookingSelectionMenu();
+
+                    var selectionMenuLimit = 2;
+                    var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+
+                    switch (selection)
+                    {
+                        case 1:
+                            var customerController = new CustomerController(dbContext);
+                            var readCustomer = new ReadCustomer(dbContext);
+                            Console.Clear();
+                            readCustomer.ReadAllCustomers();
+                            var customer = customerController.ChooseCustomer();
+                            booking.Customer = customer;
+                            dbContext.SaveChanges();
+                            Console.WriteLine("Ny kund registrerad på bokningen.");
+                            break;
+                        case 2:
+                            Console.Clear();
+
+                            //Original booking dates needs to be reset in order to make room show as available in GetAllVacantRooms()
+
+                            booking.StartDate = new DateTime(1995, 07, 03, 23, 59, 59);
+                            booking.EndDate = new DateTime(1995, 07, 03, 23, 59, 59);
 
 
-                        var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
-                        var amountOfBookedNights = bookingController.SelectAmountOfNights();
-                        var startDate = bookingController.SelectStartDate();
-                        var endDate = new DateTime(1995, 07, 03, 23, 59, 59);
+                            var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
+                            var amountOfBookedNights = bookingController.SelectAmountOfNights();
+                            var startDate = bookingController.SelectStartDate();
+                            var endDate = new DateTime(1995, 07, 03, 23, 59, 59);
 
 
-                        if (amountOfBookedNights > 0) endDate = startDate.AddDays(amountOfBookedNights);
+                            if (amountOfBookedNights > 0) endDate = startDate.AddDays(amountOfBookedNights);
 
-                        List<DateTime> newBookingAllDates = new List<DateTime>();
-                        for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
-                            newBookingAllDates.Add(dt);
+                            List<DateTime> newBookingAllDates = new List<DateTime>();
+                            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+                                newBookingAllDates.Add(dt);
 
-                        List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates, totalAmountOfGuests);
+                            List<Room> availableRooms =
+                                bookingController.GetAllVacantRooms(newBookingAllDates, totalAmountOfGuests);
 
-                        var roomIsAvailable = bookingController.DisplayAllVacantRooms(availableRooms);
+                            var roomIsAvailable = bookingController.DisplayAllVacantRooms(availableRooms);
 
-                        if (!roomIsAvailable)
-                        {
-                            Console.WriteLine("Tryck på enter.");
-                            Console.ReadKey();
-                        }
+                            if (!roomIsAvailable)
+                            {
+                                Console.WriteLine("Tryck på enter.");
+                                Console.ReadKey();
+                            }
 
-                        else
-                        {
-                            var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
-                            booking.Room = roomToBook;
-                            booking.StartDate = startDate;
-                            booking.EndDate = endDate;
-                        }
-                        break;
+                            else
+                            {
+                                var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
+                                booking.Room = roomToBook;
+                                booking.StartDate = startDate;
+                                booking.EndDate = endDate;
+                            }
 
-                    case 0:
-                        dbContext.SaveChanges();
-                        Console.WriteLine("Bokning ändrad.");
-                        Message.PressEnterToReturnToMenu();
-                        isRunning = false;
-                        break;
+                            break;
+
+                        case 0:
+                            dbContext.SaveChanges();
+                            Console.WriteLine("Bokning ändrad.");
+                            Message.PressEnterToReturnToMenu();
+                            isRunning = false;
+                            break;
+                    }
                 }
+
+
+
             }
 
         }
-
-
-        
-
-
-
 
 
     }

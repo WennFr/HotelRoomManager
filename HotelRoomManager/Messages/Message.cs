@@ -8,6 +8,16 @@ namespace HotelRoomManager.Messages
 {
     public static class Message
     {
+        public static void NoCurrentBookings()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Det finns inga nuvarande bokningar i systemet.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+
+        }
+
+
         public static void ChooseBetweenAvailableMenuNumbers()
         {
             Console.WriteLine("Välj mellan de angivna siffrorna i menyn");
@@ -19,7 +29,6 @@ namespace HotelRoomManager.Messages
             Console.ReadKey();
 
         }
-
 
         public static void WrongInput()
         {

@@ -1,4 +1,6 @@
-﻿using HotelRoomManager.Data;
+﻿using HotelRoomManager.CustomerControllers;
+using HotelRoomManager.Data;
+using HotelRoomManager.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +20,58 @@ namespace HotelRoomManager.BookingControllers
         public void Delete()
         {
 
+            Console.Clear();
+            Console.WriteLine("Avboka");
+            Console.WriteLine("======");
 
+            var readBooking = new ReadBooking(dbContext);
+            var bookingController = new BookingController(dbContext);
+
+           var isAnyRegisteredBooking = readBooking.ReadAllBookings();
+
+            if (!isAnyRegisteredBooking)
+            {
+                Message.NoCurrentBookings();
+                Message.PressEnterToReturnToMenu();
+            }
+
+            else
+            {
+
+                var bookingToDelete = bookingController.ChooseBooking();
+
+                Console.Clear();
+                Console.WriteLine(
+                    $"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
+                Console.WriteLine(
+                    $"{bookingToDelete.Id}\t\t{bookingToDelete.StartDate.ToShortDateString()}\t{bookingToDelete.EndDate.ToShortDateString()} " +
+                    $"\t{bookingToDelete.Customer.Salutation.SalutationType}{bookingToDelete.Customer.LastName}\t{bookingToDelete.Room.Id}");
+
+                while (true)
+                {
+                    Console.WriteLine(
+                        $"{Environment.NewLine}Är du säker på att du vill ta bort den här bokningen? y/n");
+                    Console.Write(">");
+                    var selection = Console.ReadLine();
+
+                    if (selection.ToLower() == "n" || selection.ToLower() == "no")
+                    {
+                        Message.PressEnterToReturnToMenu();
+                        break;
+                    }
+                    else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
+                    {
+                        dbContext.Bookings.Remove(bookingToDelete);
+                        dbContext.SaveChanges();
+                        Console.WriteLine($"{Environment.NewLine}Bokning borttagen.{Environment.NewLine}");
+                        Message.PressEnterToReturnToMenu();
+                        break;
+                    }
+                }
+
+            }
 
 
         }
-
-
-
-
-
-
-
     }
 }

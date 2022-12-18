@@ -40,7 +40,7 @@ namespace HotelRoomManager.BookingControllers
                 Console.WriteLine($"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
                 Console.WriteLine($"{booking.Id}\t\t{booking.StartDate.ToShortDateString()}\t{booking.EndDate.ToShortDateString()} " +
                                   $"\t{booking.Customer.Salutation.SalutationType}{booking.Customer.LastName}\t{booking.Room.Id}");
-                Console.WriteLine("Vad vill du ändra?");
+                Console.WriteLine($"{Environment.NewLine}Vad vill du ändra? {Environment.NewLine}");
                 Menu.UpdateBookingSelectionMenu();
 
                 var selectionMenuLimit = 2;
@@ -50,20 +50,30 @@ namespace HotelRoomManager.BookingControllers
                 {
                     case 1:
                         var customerController = new CustomerController(dbContext);
+                        var readCustomer = new ReadCustomer(dbContext);
+                        Console.Clear();
+                        readCustomer.ReadAllCustomers();
                         var customer = customerController.ChooseCustomer();
                         booking.Customer = customer;
                         dbContext.SaveChanges();
                         Console.WriteLine("Ny kund registrerad på bokningen.");
-                        Message.PressEnterToReturnToMenu();
                         break;
                     case 2:
+                        Console.Clear();
+                        booking.StartDate = new DateTime(1995, 07, 03, 23, 59, 59);
+                        booking.EndDate = new DateTime(1995, 07, 03, 23, 59, 59);
+
 
                         var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
                         var amountOfBookedNights = bookingController.SelectAmountOfNights();
-                        booking.StartDate = bookingController.SelectStartDate();
-                        if (amountOfBookedNights > 0) booking.EndDate = booking.StartDate.AddDays(amountOfBookedNights);
+                        var startDate = bookingController.SelectStartDate();
+                        var endDate = new DateTime(1995, 07, 03, 23, 59, 59);
+
+
+                        if (amountOfBookedNights > 0) endDate = startDate.AddDays(amountOfBookedNights);
+
                         List<DateTime> newBookingAllDates = new List<DateTime>();
-                        for (var dt = booking.StartDate; dt <= booking.EndDate; dt = dt.AddDays(1))
+                        for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
                             newBookingAllDates.Add(dt);
 
                         List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates, totalAmountOfGuests);
@@ -72,13 +82,16 @@ namespace HotelRoomManager.BookingControllers
 
                         if (!roomIsAvailable)
                         {
-                          
+                            Console.WriteLine("Tryck på enter.");
+                            Console.ReadKey();
                         }
 
                         else
                         {
                             var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
                             booking.Room = roomToBook;
+                            booking.StartDate = startDate;
+                            booking.EndDate = endDate;
                         }
                         break;
 

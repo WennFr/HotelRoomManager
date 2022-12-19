@@ -42,9 +42,9 @@ namespace HotelRoomManager.CustomerControllers
                 while (isRunning)
                 {
                     Console.Clear();
-                    Console.WriteLine(
-                        $"Kund: {customer.Salutation.SalutationType} {customer.FirstName} {customer.LastName}|{customer.Address}|{customer.Phone}{Environment.NewLine}");
-                    Console.WriteLine("Vad vill du ändra?");
+                    customerController.DisplayChosenCustomer(customer);
+
+                    Console.WriteLine($"Vad vill du ändra?{Environment.NewLine}");
                     Menu.UpdateCustomerSelectionMenu();
 
                     var selectionMenuLimit = 4;
@@ -70,7 +70,7 @@ namespace HotelRoomManager.CustomerControllers
                             break;
                         case 0:
                             dbContext.SaveChanges();
-                            Console.WriteLine("Ny kund sparad.");
+                            Console.WriteLine("Nya kunduppgifter sparade.");
                             Message.PressEnterToReturnToMenu();
                             isRunning = false;
                             break;

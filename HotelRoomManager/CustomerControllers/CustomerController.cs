@@ -85,6 +85,18 @@ namespace HotelRoomManager.CustomerControllers
         }
 
 
+        public void DisplayChosenCustomer(Customer customer)
+        {
+            Console.WriteLine("{0,-17} {1,-15} {2,-25} {3,-20}{4,-20} ", $"{Environment.NewLine}KundID", "Titel", "Namn", "Adress", $"Telefon{Environment.NewLine}");
+            Console.WriteLine("{0,-15} {1,-15} {2,-25} {3,-20}{4,-20}",
+                $"{customer.Id}",
+                $"{customer.Salutation.SalutationType}",
+                $"{customer.FirstName} {customer.LastName}",
+                $"{customer.Address}",
+                $"{customer.Phone}{Environment.NewLine}");
+
+        }
+
 
 
 

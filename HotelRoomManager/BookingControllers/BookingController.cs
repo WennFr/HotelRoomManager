@@ -122,15 +122,16 @@ namespace HotelRoomManager.BookingControllers
             else
             {
                 Console.WriteLine("\n\n\n Dessa rum är tillgängliga för bokning:");
-                Console.WriteLine($"\n{Environment.NewLine}ID|Floor|Type|Size|Tillåtna extrasängar {Environment.NewLine}");
-                Console.WriteLine(" ==================================================================");
-
-                foreach (var room in availableRooms.OrderBy(r => r.Id))
+                Console.WriteLine("{0,-20} {1,-20} {2,-20} {3,-20}{4,-20}", $"{Environment.NewLine}RumsID", "Rumstyp", "Våning", "Storlek", $"Tillåtna extrasängar {Environment.NewLine}");
+                foreach (var room in availableRooms.OrderBy(r => r.Size))
                 {
-                    Console.WriteLine($"{room.Id} |{room.Floor} |{room.Type}/{room.Size}/{room.ExtraBed}");
-                    Console.WriteLine($"--|--|----------------------------------------------------");
-
-
+                    Console.WriteLine("{0,-18} {1,-20} {2,-20} {3,-19} {4,-20}",
+                        $"{room.Id}",
+                        $"{room.Type}",
+                        $"{room.Floor}",
+                        $"{room.Size}kvm",
+                        $"{room.ExtraBed}");
+                    Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
                 }
                 return true;
             }
@@ -161,11 +162,26 @@ namespace HotelRoomManager.BookingControllers
         {
 
             Console.Clear();
-            Console.WriteLine(" Bokningsdetaljer");
-            Console.WriteLine(" ==================================================================");
-            Console.WriteLine(" Från\t\tTill\t\tKund\t\tRum");
-            Console.WriteLine($" {newBooking.StartDate.ToShortDateString()}\t{newBooking.EndDate.ToShortDateString()}" +
-                              $"\t{newBooking.Customer.FirstName} {newBooking.Customer.LastName}\t ID:{newBooking.Room.Id} Typ:{newBooking.Room.Type} Extrasängar:{newBooking.Room.ExtraBed}");
+            Console.WriteLine("Bokningsdetaljer");
+            Console.WriteLine("============================================================================================================");
+
+            Console.WriteLine("{0,-15} {1,-15} {2,-24} {3,-15} {4,-15} {5,-15} ", $"{Environment.NewLine}Från", "Till", "Namn", $"RumsID", $"Rumstyp", $"Tillåtna extrasängar {Environment.NewLine}");
+            Console.WriteLine("{0,-13} {1,-15} {2,-24} {3,-15} {4,-15} {5,-15} ",
+                $"{newBooking.StartDate.ToShortDateString()}",
+                $"{newBooking.EndDate.ToShortDateString()}",
+                $"{newBooking.Customer.FirstName} {newBooking.Customer.LastName}",
+                $"{newBooking.Room.Id}",
+                $"{newBooking.Room.Type}",
+                $"{newBooking.Room.ExtraBed}");
+            Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
+
+
+
+
+
+            //Console.WriteLine(" Från\t\tTill\t\tKund\t\tRum");
+            //Console.WriteLine($" {newBooking.StartDate.ToShortDateString()}\t{newBooking.EndDate.ToShortDateString()}" +
+            //                  $"\t{newBooking.Customer.FirstName} {newBooking.Customer.LastName}\t ID:{newBooking.Room.Id} Typ:{newBooking.Room.Type} Extrasängar:{newBooking.Room.ExtraBed}");
 
         }
 

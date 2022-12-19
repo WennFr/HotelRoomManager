@@ -48,11 +48,9 @@ namespace HotelRoomManager.CustomerControllers
 
                 else
                 {
-                    Console.WriteLine($"{Environment.NewLine}ID|Namn|Adress|Telefon {Environment.NewLine}");
-                    Console.WriteLine(
-                        $"Kund: {customerToDelete.Id} |{customerToDelete.Salutation.SalutationType} {customerToDelete.FirstName} {customerToDelete.LastName}/{customerToDelete.Address}/{customerToDelete.Phone} {Environment.NewLine}");
+                   customerController.DisplayChosenCustomer(customerToDelete);
 
-                    while (true)
+                   while (true)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"Är du säker på att du vill ta bort den här kunden? y/n");

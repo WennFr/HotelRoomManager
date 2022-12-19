@@ -20,7 +20,7 @@ namespace HotelRoomManager.RoomControllers
 
         public void ReadAllRooms()
         {
-            Console.WriteLine("{0,-20} {1,-20} {2,-20} {3,-20}{4,-20}", $"{Environment.NewLine}RumsID", "Rumstyp", "Våning", "Storlek", $"Möjligt antal extrasängar {Environment.NewLine}");
+            Console.WriteLine("{0,-20} {1,-20} {2,-20} {3,-20}{4,-20}", $"{Environment.NewLine}RumsID", "Rumstyp", "Våning", "Storlek", $"Tillåtna extrasängar {Environment.NewLine}");
             foreach (var room in dbContext.Rooms)
             {
                 Console.WriteLine("{0,-18} {1,-20} {2,-20} {3,-19} {4,-20}",
@@ -31,10 +31,6 @@ namespace HotelRoomManager.RoomControllers
                     $"{room.ExtraBed}");
                 Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
             }
-
-
-
-
 
 
         }

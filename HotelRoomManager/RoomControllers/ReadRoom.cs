@@ -16,9 +16,7 @@ namespace HotelRoomManager.RoomControllers
             dbContext = context;
         }
 
-
-
-        public void ReadAllRooms()
+        public bool ReadAllRooms()
         {
             Console.WriteLine("{0,-20} {1,-20} {2,-20} {3,-20}{4,-20}", $"{Environment.NewLine}RumsID", "Rumstyp", "Våning", "Storlek", $"Tillåtna extrasängar {Environment.NewLine}");
             foreach (var room in dbContext.Rooms)
@@ -32,8 +30,16 @@ namespace HotelRoomManager.RoomControllers
                 Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
             }
 
+            if (dbContext.Rooms.Count() > 0)
+                return true;
+            return false;
+
 
         }
+
+
+
+
 
 
 

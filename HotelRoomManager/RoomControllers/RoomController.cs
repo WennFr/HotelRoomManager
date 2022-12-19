@@ -61,5 +61,21 @@ namespace HotelRoomManager.RoomControllers
             }
 
         }
+
+        public void DisplayChosenRoom(Room room)
+        {
+
+            Console.WriteLine("{0,-17} {1,-20} {2,-20} {3,-20}", $"{Environment.NewLine}RumsID", "Rumstyp",
+                "Storlek", $"Tillåtna extrasängar{Environment.NewLine}");
+            Console.WriteLine("{0,-15} {1,-20} {2,-20} {3,-20}",
+                $"{room.Id}",
+                $"{room.Type}",
+                $"{room.Size}",
+                $"{room.ExtraBed}{Environment.NewLine}");
+
+        }
+
+
+
     }
 }

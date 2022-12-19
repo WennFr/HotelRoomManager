@@ -22,48 +22,54 @@ namespace HotelRoomManager.RoomControllers
             Console.Clear();
             Console.WriteLine("Ändra rum");
             Console.WriteLine($"========= {Environment.NewLine}");
-            var roomController = new RoomController(dbContext);
+
             var readRoom = new ReadRoom(dbContext);
+            var isAnyRegisteredRooms = readRoom.ReadAllRooms();
 
-            readRoom.ReadAllRooms();
-            var room = roomController.ChooseRoom();
-
-            var isRunning = true;
-            while (isRunning)
+            if (!isAnyRegisteredRooms)
             {
-                Console.Clear();
-                Console.WriteLine("{0,-17} {1,-20} {2,-20} {3,-20}", $"{Environment.NewLine}RumsID", "Rumstyp", "Storlek", $"Tillåtna extrasängar{Environment.NewLine}");
-                Console.WriteLine("{0,-15} {1,-20} {2,-20} {3,-20}",
-                    $"{room.Id}",
-                    $"{room.Type}",
-                    $"{room.Size}",
-                    $"{room.ExtraBed}{Environment.NewLine}");
+                Message.NoRegisteredRooms();
+                Message.PressEnterToReturnToMenu();
 
-                Console.WriteLine($"Vad vill du ändra?{Environment.NewLine}");
-                Menu.UpdateRoomSelectionMenu();
+            }
 
-                var selectionMenuLimit = 3;
-                var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
-
-                switch (selection)
+            else
+            {
+                var roomController = new RoomController(dbContext);
+                var room = roomController.ChooseRoom();
+                var isRunning = true;
+                while (isRunning)
                 {
-                    case 1:
-                        Console.WriteLine("Våning:");
-                        room.Floor = Console.ReadLine();
-                        break;
-                    case 2:
-                        room.Type = roomController.ControlCorrectRoomType();
-                        Console.WriteLine("Storlek:");
-                        room.Size = validIntSelection();
-                        room.ExtraBed = roomController.ControlExtraBedsByTypeAndSize(room.Type, room.Size);
-                        break;
-                    case 0:
-                        dbContext.SaveChanges();
-                        Console.WriteLine("Nytt rum sparat.");
-                        Message.PressEnterToReturnToMenu();
-                        isRunning = false;
-                        break;
+                    Console.Clear();
+                  
+                    roomController.DisplayChosenRoom(room);
+                    Console.WriteLine($"Vad vill du ändra?{Environment.NewLine}");
+                    Menu.UpdateRoomSelectionMenu();
+
+                    var selectionMenuLimit = 3;
+                    var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
+
+                    switch (selection)
+                    {
+                        case 1:
+                            Console.WriteLine("Våning:");
+                            room.Floor = Console.ReadLine();
+                            break;
+                        case 2:
+                            room.Type = roomController.ControlCorrectRoomType();
+                            Console.WriteLine("Storlek:");
+                            room.Size = validIntSelection();
+                            room.ExtraBed = roomController.ControlExtraBedsByTypeAndSize(room.Type, room.Size);
+                            break;
+                        case 0:
+                            dbContext.SaveChanges();
+                            Console.WriteLine("Nytt rum sparat.");
+                            Message.PressEnterToReturnToMenu();
+                            isRunning = false;
+                            break;
+                    }
                 }
+
             }
 
 

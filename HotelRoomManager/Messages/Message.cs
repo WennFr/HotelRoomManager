@@ -8,7 +8,14 @@ namespace HotelRoomManager.Messages
 {
     public static class Message
     {
+        public static void NoRegisteredRooms()
+        {
 
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Det finns inga registrerade rum i systemet.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+        }
 
         public static void NoRegisteredCustomers()
         {

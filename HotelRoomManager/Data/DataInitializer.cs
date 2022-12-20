@@ -28,8 +28,8 @@ public class DataInitializer
         SeedRooms();
         dbContext.SaveChanges();
 
-       // SeedBooking();
-      //  dbContext.SaveChanges();
+        //SeedBooking();
+        //dbContext.SaveChanges();
     }
 
     public void SeedSalutations()
@@ -113,7 +113,7 @@ public class DataInitializer
         var roomController = new RoomController(dbContext);
         var room = new Room();
 
-        if (!dbContext.Rooms.Any(r => r.Id == 1))
+        if (!dbContext.Rooms.Any(r => r.Size == 20))
         {
             dbContext.Rooms.Add(new Room
             {
@@ -125,7 +125,7 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Rooms.Any(r => r.Id == 2))
+        if (!dbContext.Rooms.Any(r => r.Size == 27))
         {
             dbContext.Rooms.Add(new Room
             {
@@ -137,19 +137,19 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Rooms.Any(r => r.Id == 3))
+        if (!dbContext.Rooms.Any(r => r.Size == 17))
         {
             dbContext.Rooms.Add(new Room
             {
                 Floor = "2",
                 Type = "Single",
-                Size = 20,
+                Size = 17,
                 ExtraBed = 0
 
             });
         }
 
-        if (!dbContext.Rooms.Any(r => r.Id == 4))
+        if (!dbContext.Rooms.Any(r => r.Size == 35))
         {
             dbContext.Rooms.Add( new Room
             {
@@ -159,8 +159,8 @@ public class DataInitializer
                 ExtraBed = 2
             });
         }
-
     }
+
     //public void SeedBooking()
     //{
     //    if (!dbContext.Bookings.Any(b => b.Id == 1))

@@ -26,7 +26,7 @@ namespace HotelRoomManager.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=localhost;Database=HotelDatabase;Trusted_Connection=True;TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer(@"Server=localhost;Database=FredericksHotelDatabase;Trusted_Connection=True;TrustServerCertificate=true");
             }
         }
 

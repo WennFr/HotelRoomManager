@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelRoomManager.Data;
 using HotelRoomManager.Messages;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelRoomManager.RoomControllers
 {
@@ -49,8 +50,9 @@ namespace HotelRoomManager.RoomControllers
             Console.WriteLine($"Välj Id på rummet du vill ändra på:");
             while (true)
             {
+                Console.WriteLine(">");
                 if (int.TryParse(Console.ReadLine(), out intSelection) &&
-                    dbContext.Rooms.Any(c => c.Id == intSelection))
+                    dbContext.Rooms.Any(r => r.Id == intSelection))
                 {
                     var roomSelection = dbContext.Rooms.FirstOrDefault(s => s.Id == intSelection);
                     Console.Clear();
@@ -59,7 +61,6 @@ namespace HotelRoomManager.RoomControllers
 
                 Message.ChooseBetweenAvailableMenuNumbers();
             }
-
         }
 
         public void DisplayChosenRoom(Room room)
@@ -74,6 +75,20 @@ namespace HotelRoomManager.RoomControllers
                 $"{room.ExtraBed}{Environment.NewLine}");
 
         }
+
+        public bool CheckIfRoomIsBooked(Room roomToDelete)
+        {
+            foreach (var booking in dbContext.Bookings.Include(b => b.Room).Where(b => b.Room == roomToDelete))
+                if (booking.Room == roomToDelete)
+                    return true;
+            return false;
+        }
+
+
+
+
+
+
 
 
 

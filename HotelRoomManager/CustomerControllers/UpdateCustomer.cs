@@ -70,7 +70,7 @@ namespace HotelRoomManager.CustomerControllers
                             break;
                         case 0:
                             dbContext.SaveChanges();
-                            Console.WriteLine("Nya kunduppgifter sparade.");
+                            Message.ChangesSaved();
                             Message.PressEnterToReturnToMenu();
                             isRunning = false;
                             break;

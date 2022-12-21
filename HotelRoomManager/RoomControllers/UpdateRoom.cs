@@ -41,7 +41,7 @@ namespace HotelRoomManager.RoomControllers
                 while (isRunning)
                 {
                     Console.Clear();
-                  
+
                     roomController.DisplayChosenRoom(room);
                     Console.WriteLine($"Vad vill du ändra?{Environment.NewLine}");
                     Menu.UpdateRoomSelectionMenu();
@@ -56,14 +56,40 @@ namespace HotelRoomManager.RoomControllers
                             room.Floor = Console.ReadLine();
                             break;
                         case 2:
-                            room.Type = roomController.ControlCorrectRoomType();
-                            Console.WriteLine("Storlek:");
-                            room.Size = validIntSelection();
-                            room.ExtraBed = roomController.ControlExtraBedsByTypeAndSize(room.Type, room.Size);
+                            var newRoomType = roomController.ControlCorrectRoomType();
+                            var isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomType,room.Size);
+
+                            if (!isCorrectRoomSize)
+                                Message.PressEnter();
+                            
+                            else
+                            {
+                                room.Type = newRoomType;
+                                room.ExtraBed = roomController.ControlExtraBedsByTypeAndSize(room.Type, room.Size);
+                            }
+
                             break;
+                        case 3:
+                            Console.WriteLine($"{Environment.NewLine}Storlek:");
+                            var newRoomSize = validIntSelection();
+
+                            isCorrectRoomSize = roomController.ControlCorrectRoomSize(room.Type, newRoomSize);
+
+                            if (!isCorrectRoomSize)
+                                Message.PressEnter();
+                            
+
+                            else
+                            {
+                                room.Size = newRoomSize;
+                                room.ExtraBed = roomController.ControlExtraBedsByTypeAndSize(room.Type, room.Size);
+                            }
+                            break;
+
                         case 0:
                             dbContext.SaveChanges();
-                            Console.WriteLine("Nytt rum sparat.");
+                            Console.Clear();
+                            Message.ChangesSaved();
                             Message.PressEnterToReturnToMenu();
                             isRunning = false;
                             break;
@@ -80,6 +106,7 @@ namespace HotelRoomManager.RoomControllers
             int intSelection;
             while (true)
             {
+                Console.Write(">");
                 if (int.TryParse(Console.ReadLine(), out intSelection))
                 {
                     return intSelection;

@@ -103,7 +103,8 @@ namespace HotelRoomManager.Menus
         public static void UpdateRoomSelectionMenu()
         {
             Console.WriteLine("1) Våning");
-            Console.WriteLine("2) Rumstyp & Storlek");
+            Console.WriteLine("2) Rumstyp");
+            Console.WriteLine("3) Storlek");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0) Spara och gå tillbaka");
             Console.ForegroundColor = ConsoleColor.Gray;

@@ -24,22 +24,33 @@ namespace HotelRoomManager.RoomControllers
                 Console.WriteLine("Registrera nytt rum");
                 Console.WriteLine("===================");
                 var roomController = new RoomController(dbContext);
+                var isCorrectRoomSize = false;
                 try
                 {
                     Console.WriteLine($"{Environment.NewLine}Rumsvåning:");
-                    var floor = Console.ReadLine();
-                    var type = roomController.ControlCorrectRoomType();
-                    Console.WriteLine($"{Environment.NewLine}Rumsstorlek (siffra i kvm):  ");
-                    var size = Convert.ToInt32(Console.ReadLine());
-                    var extraBed = roomController.ControlExtraBedsByTypeAndSize(type, size);
-                    Console.WriteLine($"{Environment.NewLine}Antal tillåtna sängar sätts automatiskt efter rumsstorlek.");
+                    Console.Write(">");
+                    var newRoomFloor = Console.ReadLine();
+                    var newRoomType = roomController.ControlCorrectRoomType();
+
+                    var newRoomSize = 0;
+                    while (!isCorrectRoomSize)
+                    {
+                        Console.WriteLine($"{Environment.NewLine}Rumsstorlek (siffra i kvm):  ");
+                        Console.Write(">");
+                        newRoomSize = Convert.ToInt32(Console.ReadLine());
+                        isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomType, newRoomSize);
+                    }
+
+                    var newRoomExtraBed = roomController.ControlExtraBedsByTypeAndSize(newRoomType, newRoomSize);
+                    Console.WriteLine($"{Environment.NewLine}Antal tillåtna extrasängar sätts automatiskt efter typ och rumsstorlek.");
+                    Console.WriteLine($"Antal till extrasängar för nytt rum är {newRoomExtraBed}st");
                     Thread.Sleep(2000);
                     dbContext.Rooms.Add(new Room()
                     {
-                        Floor = floor,
-                        Type = type,
-                        Size = size,
-                        ExtraBed = extraBed
+                        Floor = newRoomFloor,
+                        Type = newRoomType,
+                        Size = newRoomSize,
+                        ExtraBed = newRoomExtraBed
                     });
                     dbContext.SaveChanges();
                     break;
@@ -47,10 +58,14 @@ namespace HotelRoomManager.RoomControllers
                 catch (Exception ex)
                 {
                     Message.WrongInput();
+                    Message.PressEnter();
                     continue;
                 }
             }
-            Console.WriteLine($"{Environment.NewLine}Nytt rum registrerat.");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Nytt rum registrerat!");
+            Console.ForegroundColor = ConsoleColor.Gray;
             Message.PressEnterToReturnToMenu();
         }
 

@@ -9,17 +9,31 @@ namespace HotelRoomManager.Messages
     public static class Message
     {
 
+
+        public static void ChangesSaved()
+        {
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Ändringar sparade!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+        }
+
+        public static void PressEnter()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Tryck på enter.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ReadKey();
+        }
+
+
+
         public static void NewBookedRoomUpdated()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Nytt rum bokat!");
             Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Tryck på enter.");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.ReadKey();
 
         }
 
@@ -29,11 +43,6 @@ namespace HotelRoomManager.Messages
             Console.WriteLine("Nytt datum satt!");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Tryck på enter.");
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Console.ReadKey();
         }
 
 
@@ -95,11 +104,7 @@ namespace HotelRoomManager.Messages
             Console.WriteLine($"{Environment.NewLine}Felaktig inmatning, försök igen.");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"{Environment.NewLine}Tryck på enter för starta om.");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.ReadKey();
-
+            
         }
 
 

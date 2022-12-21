@@ -52,6 +52,7 @@ namespace HotelRoomManager.CustomerControllers
                 catch (Exception ex)
                 {
                     Message.WrongInput();
+                    Message.PressEnter();
                     continue;
                 }
 

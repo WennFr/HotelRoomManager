@@ -113,7 +113,7 @@ public class DataInitializer
         var roomController = new RoomController(dbContext);
         var room = new Room();
 
-        if (!dbContext.Rooms.Any(r => r.Size == 20))
+        if (!dbContext.Rooms.Any(r => r.Type == "Single"))
         {
             dbContext.Rooms.Add(new Room
             {
@@ -125,7 +125,7 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Rooms.Any(r => r.Size == 27))
+        if (!dbContext.Rooms.Any(r => r.Type == "Double"))
         {
             dbContext.Rooms.Add(new Room
             {
@@ -137,7 +137,7 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Rooms.Any(r => r.Size == 17))
+        if (!dbContext.Rooms.Any(r => r.Type == "Single"))
         {
             dbContext.Rooms.Add(new Room
             {
@@ -149,7 +149,7 @@ public class DataInitializer
             });
         }
 
-        if (!dbContext.Rooms.Any(r => r.Size == 35))
+        if (!dbContext.Rooms.Any(r => r.Type == "Double"))
         {
             dbContext.Rooms.Add( new Room
             {

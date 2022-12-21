@@ -24,6 +24,7 @@ namespace HotelRoomManager.RoomControllers
 
             while (true)
             {
+                Console.Write(">");
                 var input = Console.ReadLine();
                 if (Enum.TryParse<Room.RoomType>(input, ignoreCase: true, out var type) && Enum.IsDefined(type))
                     return type.ToString();
@@ -31,6 +32,21 @@ namespace HotelRoomManager.RoomControllers
                 Console.WriteLine("Var god välj mellan Single eller Double. ");
             }
         }
+
+        public bool ControlCorrectRoomSize(string roomType, int roomSize)
+        {
+            if (roomType == Convert.ToString(Room.RoomType.Double) && roomSize < 20)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Dubbelrum kan inte vara mindre än 20kvm.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                return false;
+            }
+
+            return true;
+        }
+
+
         public int ControlExtraBedsByTypeAndSize(string type, int size)
         {
 
@@ -66,11 +82,12 @@ namespace HotelRoomManager.RoomControllers
         public void DisplayChosenRoom(Room room)
         {
 
-            Console.WriteLine("{0,-17} {1,-20} {2,-20} {3,-20}", $"{Environment.NewLine}RumsID", "Rumstyp",
-                "Storlek", $"Tillåtna extrasängar{Environment.NewLine}");
-            Console.WriteLine("{0,-15} {1,-20} {2,-20} {3,-20}",
+            Console.WriteLine("{0,-17} {1,-20} {2,-20} {3,-20} {4,-20}", 
+                $"{Environment.NewLine}RumsID", "Rumstyp","Våning", "Storlek", $"Tillåtna extrasängar{Environment.NewLine}");
+            Console.WriteLine("{0,-15} {1,-20} {2,-20} {3,-20} {4,-20}",
                 $"{room.Id}",
                 $"{room.Type}",
+                $"{room.Floor}",
                 $"{room.Size}",
                 $"{room.ExtraBed}{Environment.NewLine}");
 

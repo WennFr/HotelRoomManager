@@ -74,7 +74,7 @@ namespace HotelRoomManager.BookingControllers
 
                             Console.Clear();
                             Console.WriteLine("Boka nytt rum");
-                            
+
                             var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
 
                             List<DateTime> newBookingAllDates = new List<DateTime>();
@@ -126,8 +126,7 @@ namespace HotelRoomManager.BookingControllers
                                 currentBooking.StartDate = backUpStartDate;
                                 currentBooking.EndDate = backUpEndDate;
                                 Console.WriteLine("Rummet är bokat på dessa datum. Var god prova ett annat datum.");
-                                Console.WriteLine("Tryck på enter.");
-                                Console.ReadKey();
+                                Message.PressEnter();
                             }
                             else
                             {
@@ -135,6 +134,7 @@ namespace HotelRoomManager.BookingControllers
                                 currentBooking.EndDate = endDate;
                                 dbContext.SaveChanges();
                                 Message.NewBookingDateUpdated();
+                                Message.PressEnter();
                             }
 
                             break;
@@ -142,7 +142,7 @@ namespace HotelRoomManager.BookingControllers
 
                         case 0:
                             dbContext.SaveChanges();
-                            Console.WriteLine("Bokning ändrad.");
+                            Message.ChangesSaved();
                             Message.PressEnterToReturnToMenu();
                             isRunning = false;
                             break;

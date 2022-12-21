@@ -98,7 +98,5 @@ namespace HotelRoomManager.CustomerControllers
         }
 
 
-
-
     }
 }

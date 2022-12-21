@@ -108,7 +108,6 @@ namespace HotelRoomManager.BookingControllers
             return availableRooms;
 
         }
-
         public bool DisplayAllVacantRooms(List<Room> availableRooms)
         {
             if (availableRooms.Count() < 1)
@@ -154,9 +153,7 @@ namespace HotelRoomManager.BookingControllers
 
                 Message.ChooseBetweenAvailableMenuNumbers();
             }
-
         }
-
 
         public void DisplayBookingDetails(Booking newBooking)
         {
@@ -174,14 +171,6 @@ namespace HotelRoomManager.BookingControllers
                 $"{newBooking.Room.Type}",
                 $"{newBooking.Room.ExtraBed}");
             Console.WriteLine($"-----------------------------------------------------------------------------------------------------------");
-
-
-
-
-
-            //Console.WriteLine(" Från\t\tTill\t\tKund\t\tRum");
-            //Console.WriteLine($" {newBooking.StartDate.ToShortDateString()}\t{newBooking.EndDate.ToShortDateString()}" +
-            //                  $"\t{newBooking.Customer.FirstName} {newBooking.Customer.LastName}\t ID:{newBooking.Room.Id} Typ:{newBooking.Room.Type} Extrasängar:{newBooking.Room.ExtraBed}");
 
         }
 
@@ -205,6 +194,25 @@ namespace HotelRoomManager.BookingControllers
             }
 
         }
+
+        public bool IsNewDateValid(Room bookedRoom, List<DateTime> newBookingAllDates)
+        {
+
+            foreach (var booking in dbContext.Bookings.Where(b=> b.Room == bookedRoom))
+            {
+                for (var dt = booking.StartDate; dt <= booking.EndDate; dt = dt.AddDays(1))
+                {
+                    if (newBookingAllDates.Contains(dt))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
 
 
 

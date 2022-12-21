@@ -19,3 +19,5 @@ from Rooms
 select *
 from Customers c
 
+select *
+from Bookings b

@@ -41,7 +41,7 @@ namespace HotelRoomManager.BookingControllers
 
             else
             {
-                var booking = bookingController.ChooseBooking();
+                var currentBooking = bookingController.ChooseBooking();
                 var isRunning = true;
                 while (isRunning)
                 {
@@ -49,12 +49,12 @@ namespace HotelRoomManager.BookingControllers
                     Console.WriteLine(
                         $"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
                     Console.WriteLine(
-                        $"{booking.Id}\t\t{booking.StartDate.ToShortDateString()}\t{booking.EndDate.ToShortDateString()} " +
-                        $"\t{booking.Customer.Salutation.SalutationType}{booking.Customer.LastName}\t{booking.Room.Id}");
+                        $"{currentBooking.Id}\t\t{currentBooking.StartDate.ToShortDateString()}\t{currentBooking.EndDate.ToShortDateString()} " +
+                        $"\t{currentBooking.Customer.Salutation.SalutationType}{currentBooking.Customer.LastName}\t{currentBooking.Room.Id}");
                     Console.WriteLine($"{Environment.NewLine}Vad vill du ändra? {Environment.NewLine}");
                     Menu.UpdateBookingSelectionMenu();
 
-                    var selectionMenuLimit = 2;
+                    var selectionMenuLimit = 3;
                     var selection = MenuSelection.ValidateSelection(selectionMenuLimit);
 
                     switch (selection)
@@ -65,34 +65,23 @@ namespace HotelRoomManager.BookingControllers
                             Console.Clear();
                             readCustomer.ReadAllCustomers();
                             var customer = customerController.ChooseCustomer();
-                            booking.Customer = customer;
+                            currentBooking.Customer = customer;
                             dbContext.SaveChanges();
                             Console.WriteLine("Ny kund registrerad på bokningen.");
                             break;
+
                         case 2:
+
                             Console.Clear();
-
-                            //Original booking dates needs to be reset in order to make room show as available in GetAllVacantRooms()
-
-                            booking.StartDate = new DateTime(1995, 07, 03, 23, 59, 59);
-                            booking.EndDate = new DateTime(1995, 07, 03, 23, 59, 59);
-
-
+                            Console.WriteLine("Boka nytt rum");
+                            
                             var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
-                            var amountOfBookedNights = bookingController.SelectAmountOfNights();
-                            var startDate = bookingController.SelectStartDate();
-                            var endDate = new DateTime(1995, 07, 03, 23, 59, 59);
-
-
-                            if (amountOfBookedNights > 0) endDate = startDate.AddDays(amountOfBookedNights);
 
                             List<DateTime> newBookingAllDates = new List<DateTime>();
-                            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+                            for (var dt = currentBooking.StartDate; dt <= currentBooking.EndDate; dt = dt.AddDays(1))
                                 newBookingAllDates.Add(dt);
 
-                            List<Room> availableRooms =
-                                bookingController.GetAllVacantRooms(newBookingAllDates, totalAmountOfGuests);
-
+                            List<Room> availableRooms = bookingController.GetAllVacantRooms(newBookingAllDates, totalAmountOfGuests);
                             var roomIsAvailable = bookingController.DisplayAllVacantRooms(availableRooms);
 
                             if (!roomIsAvailable)
@@ -104,12 +93,52 @@ namespace HotelRoomManager.BookingControllers
                             else
                             {
                                 var roomToBook = bookingController.ChooseVacantRoom(availableRooms);
-                                booking.Room = roomToBook;
-                                booking.StartDate = startDate;
-                                booking.EndDate = endDate;
+                                currentBooking.Room = roomToBook;
+                                dbContext.SaveChanges();
+                                Message.NewBookedRoomUpdated();
+                            }
+                            break;
+
+                        case 3:
+
+                            Console.WriteLine("Ändra datum:");
+
+                            var backUpStartDate = currentBooking.StartDate;
+                            var backUpEndDate = currentBooking.EndDate;
+
+                            //Original booking dates needs to be reset.
+                            currentBooking.StartDate = new DateTime(1995, 07, 03, 23, 59, 59);
+                            currentBooking.EndDate = new DateTime(1995, 07, 03, 23, 59, 59);
+
+                            var amountOfBookedNights = bookingController.SelectAmountOfNights();
+                            var startDate = bookingController.SelectStartDate();
+                            var endDate = new DateTime(1995, 07, 03, 23, 59, 59);
+                            if (amountOfBookedNights > 0) endDate = startDate.AddDays(amountOfBookedNights);
+
+                            newBookingAllDates = new List<DateTime>();
+                            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
+                                newBookingAllDates.Add(dt);
+
+                            var isNewDateValid = bookingController.IsNewDateValid(currentBooking.Room, newBookingAllDates);
+
+                            if (!isNewDateValid)
+                            {
+                                currentBooking.StartDate = backUpStartDate;
+                                currentBooking.EndDate = backUpEndDate;
+                                Console.WriteLine("Rummet är bokat på dessa datum. Var god prova ett annat datum.");
+                                Console.WriteLine("Tryck på enter.");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                currentBooking.StartDate = startDate;
+                                currentBooking.EndDate = endDate;
+                                dbContext.SaveChanges();
+                                Message.NewBookingDateUpdated();
                             }
 
                             break;
+
 
                         case 0:
                             dbContext.SaveChanges();

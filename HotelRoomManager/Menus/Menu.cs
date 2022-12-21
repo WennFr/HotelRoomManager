@@ -111,14 +111,12 @@ namespace HotelRoomManager.Menus
 
         public static void UpdateBookingSelectionMenu()
         {
-
             Console.WriteLine("1) Kund");
             Console.WriteLine("2) Rum");
+            Console.WriteLine("3) Datum");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0) Spara och gå tillbaka");
             Console.ForegroundColor = ConsoleColor.Gray;
-
-
         }
 
 

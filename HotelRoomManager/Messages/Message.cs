@@ -8,6 +8,35 @@ namespace HotelRoomManager.Messages
 {
     public static class Message
     {
+
+        public static void NewBookedRoomUpdated()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Nytt rum bokat!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Tryck på enter.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.ReadKey();
+
+        }
+
+        public static void NewBookingDateUpdated()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Nytt datum satt!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Tryck på enter.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.ReadKey();
+        }
+
+
         public static void NoRegisteredRooms()
         {
 

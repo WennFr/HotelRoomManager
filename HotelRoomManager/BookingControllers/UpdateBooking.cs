@@ -73,7 +73,7 @@ namespace HotelRoomManager.BookingControllers
                         case 2:
 
                             Console.Clear();
-                            Console.WriteLine("Boka nytt rum");
+                            Console.WriteLine($"Boka nytt rum{Environment.NewLine}");
 
                             var totalAmountOfGuests = bookingController.ControlAmountOfGuests();
 

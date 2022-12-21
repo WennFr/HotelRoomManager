@@ -63,7 +63,7 @@ namespace HotelRoomManager.RoomControllers
         public Room ChooseRoom()
         {
             int intSelection;
-            Console.WriteLine($"Välj Id på rummet du vill ändra på:");
+            Console.WriteLine($"Välj Id på rummet du vill selektera på:");
             while (true)
             {
                 Console.WriteLine(">");

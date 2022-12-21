@@ -32,7 +32,7 @@ namespace HotelRoomManager.Messages
         public static void NewBookedRoomUpdated()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Nytt rum bokat!");
+            Console.WriteLine($"{Environment.NewLine}Nytt rum bokat!");
             Console.ForegroundColor = ConsoleColor.Gray;
 
         }

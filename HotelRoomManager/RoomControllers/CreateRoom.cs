@@ -70,7 +70,5 @@ namespace HotelRoomManager.RoomControllers
         }
 
 
-
-
     }
 }

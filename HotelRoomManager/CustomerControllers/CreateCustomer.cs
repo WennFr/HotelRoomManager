@@ -30,12 +30,16 @@ namespace HotelRoomManager.CustomerControllers
                     Console.WriteLine($"{Environment.NewLine}Välj titel:");
                     var salutationInput = customerController.ControlCustomerSalutation();
                     Console.WriteLine($"{Environment.NewLine}Förnamn:");
+                    Console.Write(">");
                     var firstName = Console.ReadLine();
                     Console.WriteLine($"{Environment.NewLine}Efternamn:");
+                    Console.Write(">");
                     var lastName = Console.ReadLine();
                     Console.WriteLine($"{Environment.NewLine}Adress:");
+                    Console.Write(">");
                     var address = Console.ReadLine();
                     Console.WriteLine($"{Environment.NewLine}Telefon:");
+                    Console.Write(">");
                     var phone = Console.ReadLine();
 
                     dbContext.Customers.Add(new Customer()

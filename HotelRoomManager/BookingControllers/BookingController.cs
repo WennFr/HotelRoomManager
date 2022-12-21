@@ -177,7 +177,7 @@ namespace HotelRoomManager.BookingControllers
         public Booking ChooseBooking()
         {
             int intSelection;
-            Console.WriteLine($"Välj Id på den bokning du vill välja:");
+            Console.WriteLine($"Välj Id på den bokning du vill selektera:");
 
             while (true)
             {

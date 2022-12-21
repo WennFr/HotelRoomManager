@@ -21,13 +21,12 @@ namespace HotelRoomManager.CustomerControllers
         public Salutation ControlCustomerSalutation()
         {
             int intSelection;
-            Console.WriteLine($"{Environment.NewLine}Välj titel:");
-
             foreach (var salutation in dbContext.Salutations)
                 Console.WriteLine($"{salutation.Id} - {salutation.SalutationType}");
 
             while (true)
             {
+                Console.Write(">");
                 if (int.TryParse(Console.ReadLine(), out intSelection) &&
                     dbContext.Salutations.Any(s => s.Id == intSelection))
                 {
@@ -56,7 +55,7 @@ namespace HotelRoomManager.CustomerControllers
         public Customer ChooseCustomer()
         {
             int intSelection;
-            Console.WriteLine($"Välj Id på den kund du vill välja:");
+            Console.WriteLine($"Välj Id på den kund du vill selektera:");
 
             while (true)
             {

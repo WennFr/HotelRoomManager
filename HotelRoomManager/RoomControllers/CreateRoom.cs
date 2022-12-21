@@ -43,8 +43,8 @@ namespace HotelRoomManager.RoomControllers
 
                     var newRoomExtraBed = roomController.ControlExtraBedsByTypeAndSize(newRoomType, newRoomSize);
                     Console.WriteLine($"{Environment.NewLine}Antal tillåtna extrasängar sätts automatiskt efter typ och rumsstorlek.");
-                    Console.WriteLine($"Antal till extrasängar för nytt rum är {newRoomExtraBed}st");
-                    Thread.Sleep(2000);
+                    Console.WriteLine($"Tillåtna extrasängar för det nya rummet är: {newRoomExtraBed}.{Environment.NewLine}");
+                    Message.PressEnter();
                     dbContext.Rooms.Add(new Room()
                     {
                         Floor = newRoomFloor,

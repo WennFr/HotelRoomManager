@@ -17,10 +17,11 @@ namespace HotelRoomManager.Data
         [MaxLength(50)]
         public string Floor { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Type { get; set; }
+        [Required]
         public int Size { get; set; }
         public int ExtraBed { get; set; }
-        public List<Booking> RoomBookings { get; set; }
 
         public enum RoomType
         {

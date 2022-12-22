@@ -86,8 +86,7 @@ namespace HotelRoomManager.BookingControllers
 
                             if (!roomIsAvailable)
                             {
-                                Console.WriteLine("Tryck på enter.");
-                                Console.ReadKey();
+                               Message.PressEnter();
                             }
 
                             else

@@ -211,15 +211,5 @@ namespace HotelRoomManager.BookingControllers
             return true;
         }
 
-
-
-
-
-
-
-
-
-
-
     }
 }

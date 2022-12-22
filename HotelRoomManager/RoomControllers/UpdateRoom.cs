@@ -57,7 +57,7 @@ namespace HotelRoomManager.RoomControllers
                             break;
                         case 2:
                             var newRoomType = roomController.ControlCorrectRoomType();
-                            var isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomType,room.Size);
+                            var isCorrectRoomSize = roomController.ControlCorrectRoomSize(room.Size);
 
                             if (!isCorrectRoomSize)
                                 Message.PressEnter();
@@ -73,7 +73,7 @@ namespace HotelRoomManager.RoomControllers
                             Console.WriteLine($"{Environment.NewLine}Storlek:");
                             var newRoomSize = validIntSelection();
 
-                            isCorrectRoomSize = roomController.ControlCorrectRoomSize(room.Type, newRoomSize);
+                            isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomSize);
 
                             if (!isCorrectRoomSize)
                                 Message.PressEnter();
@@ -114,12 +114,6 @@ namespace HotelRoomManager.RoomControllers
                 Console.WriteLine("Du måste skriva in en siffra");
             }
         }
-
-
-
-
-
-
 
     }
 }

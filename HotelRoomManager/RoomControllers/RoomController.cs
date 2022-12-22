@@ -33,12 +33,12 @@ namespace HotelRoomManager.RoomControllers
             }
         }
 
-        public bool ControlCorrectRoomSize(string roomType, int roomSize)
+        public bool ControlCorrectRoomSize(int roomSize)
         {
-            if (roomType == Convert.ToString(Room.RoomType.Double) && roomSize < 20)
+            if ( roomSize < 15)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Dubbelrum kan inte vara mindre än 20kvm.");
+                Console.WriteLine("Ett rum kan inte vara mindre än 15kvm.");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 return false;
             }

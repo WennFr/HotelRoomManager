@@ -38,7 +38,7 @@ namespace HotelRoomManager.RoomControllers
                         Console.WriteLine($"{Environment.NewLine}Rumsstorlek (siffra i kvm):  ");
                         Console.Write(">");
                         newRoomSize = Convert.ToInt32(Console.ReadLine());
-                        isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomType, newRoomSize);
+                        isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomSize);
                     }
 
                     var newRoomExtraBed = roomController.ControlExtraBedsByTypeAndSize(newRoomType, newRoomSize);

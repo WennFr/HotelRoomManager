@@ -52,8 +52,8 @@ namespace HotelRoomManager.RoomControllers
                     switch (selection)
                     {
                         case 1:
-                            Console.WriteLine("Våning:");
-                            room.Floor = Console.ReadLine();
+                            Console.WriteLine("Rumsvåning (siffra):");
+                            room.Floor = validIntSelection();
                             break;
                         case 2:
                             var newRoomType = roomController.ControlCorrectRoomType();
@@ -70,7 +70,7 @@ namespace HotelRoomManager.RoomControllers
 
                             break;
                         case 3:
-                            Console.WriteLine($"{Environment.NewLine}Storlek:");
+                            Console.WriteLine($"Rumsstorlek (siffra i kvm):  ");
                             var newRoomSize = validIntSelection();
 
                             isCorrectRoomSize = roomController.ControlCorrectRoomSize(newRoomSize);

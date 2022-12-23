@@ -28,8 +28,6 @@ public class DataInitializer
         SeedRooms();
         dbContext.SaveChanges();
 
-        //SeedBooking();
-        //dbContext.SaveChanges();
     }
 
     public void SeedSalutations()
@@ -117,7 +115,7 @@ public class DataInitializer
         {
             dbContext.Rooms.Add(new Room
             {
-                Floor = "1",
+                Floor = 1,
                 Type = "Single",
                 Size = 20,
                 ExtraBed = 0
@@ -129,7 +127,7 @@ public class DataInitializer
         {
             dbContext.Rooms.Add(new Room
             {
-                Floor = "2",
+                Floor = 2,
                 Type = "Double",
                 Size = 27,
                 ExtraBed = 1
@@ -141,7 +139,7 @@ public class DataInitializer
         {
             dbContext.Rooms.Add(new Room
             {
-                Floor = "2",
+                Floor = 2,
                 Type = "Single",
                 Size = 17,
                 ExtraBed = 0
@@ -153,37 +151,12 @@ public class DataInitializer
         {
             dbContext.Rooms.Add( new Room
             {
-                Floor = "1",
+                Floor = 1,
                 Type = "Double",
                 Size = 35,
                 ExtraBed = 2
             });
         }
     }
-
-    //public void SeedBooking()
-    //{
-    //    if (!dbContext.Bookings.Any(b => b.Id == 1))
-    //    {
-    //        var customer = new Customer();
-    //        foreach (var c in dbContext.Customers)
-    //            if (c.Id == 3)
-    //                customer = c;
-
-    //        var room = new Room();
-    //        foreach (var r in dbContext.Rooms)
-    //            if (r.Id == 3)
-    //                room = r;
-
-    //        dbContext.Bookings.Add(new Booking()
-    //        {
-    //            StartDate = DateTime.ParseExact("2023-03-05", "yyyy-MM-dd", CultureInfo.CurrentCulture),
-    //            EndDate = DateTime.ParseExact("2023-03-10", "yyyy-MM-dd", CultureInfo.CurrentCulture),
-    //            Customer = customer,
-    //            Room = room
-    //        });
-
-    //    }
-    //}
 
 }

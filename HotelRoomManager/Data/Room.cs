@@ -14,14 +14,14 @@ namespace HotelRoomManager.Data
 
         [Key]
         public int Id { get; set; }
-        [MaxLength(50)]
-        public string Floor { get; set; }
+        [Required]
+        public int Floor { get; set; }
         [MaxLength(50)]
         [Required]
         public string Type { get; set; }
         [Required]
         public int Size { get; set; }
-        public int ExtraBed { get; set; }
+        public int? ExtraBed { get; set; }
 
         public enum RoomType
         {

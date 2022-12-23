@@ -17,11 +17,12 @@ namespace HotelRoomManager.Data
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; } = null!;
+        [Required]
         [MaxLength(50)]
-        public string? Address { get; set; }
+        public string Address { get; set; }
         [Required]
         [MaxLength(30)]
-        public string? Phone { get; set; }
+        public string Phone { get; set; }
         public Salutation Salutation { get; set; }
        
 

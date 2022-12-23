@@ -29,7 +29,7 @@ namespace HotelRoomManager.RoomControllers
                 {
                     Console.WriteLine($"{Environment.NewLine}Rumsvåning (siffra):");
                     Console.Write(">");
-                    var newRoomFloor = Console.ReadLine();
+                    var newRoomFloor = Convert.ToInt32(Console.ReadLine());
                     var newRoomType = roomController.ControlCorrectRoomType();
 
                     var newRoomSize = 0;

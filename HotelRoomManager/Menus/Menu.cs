@@ -21,6 +21,7 @@ namespace HotelRoomManager.Menus
                 Console.WriteLine("1) Bokningar");
                 Console.WriteLine("2) Registrera");
                 Console.WriteLine("3) Ändra systemuppgifter");
+                Console.WriteLine("4) Radera");
                 Console.WriteLine("0) Avsluta applikationen");
 
                 applicationIsRunning = MenuSelection.Main();

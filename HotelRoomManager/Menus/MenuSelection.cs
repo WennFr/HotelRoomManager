@@ -17,7 +17,7 @@ public static class MenuSelection
     }
     public static bool Main()
     {
-        selMenuLimit = 3;
+        selMenuLimit = 4;
         var selection = ValidateSelection(selMenuLimit);
 
         switch (selection)
@@ -29,7 +29,10 @@ public static class MenuSelection
                 Menu.RegistrationMenu();
                 break;
             case 3:
-                Menu.EditSystemDataMenu();
+                Menu.UpdateSystemDataMenu();
+                break;
+            case 4:
+                Menu.DeleteEntityMenu();
                 break;
         }
 
@@ -85,7 +88,7 @@ public static class MenuSelection
     }
     public static void UpdateSystemData()
     {
-        selMenuLimit = 4;
+        selMenuLimit = 3;
         selection = ValidateSelection(selMenuLimit);
         switch (selection)
         {
@@ -101,10 +104,6 @@ public static class MenuSelection
                 var updateBooking = new UpdateBooking(dbContext);
                updateBooking.Update();
                 break;
-            case 4:
-                Menu.DeleteEntityMenu();
-                break;
-
         }
 
         Menu.MainMenu();
@@ -133,9 +132,7 @@ public static class MenuSelection
             
         }
 
-
-
-
+        Menu.MainMenu();
     }
 
 

@@ -21,7 +21,9 @@ namespace HotelRoomManager.Menus
                 Console.WriteLine("1) Bokningar");
                 Console.WriteLine("2) Registrera");
                 Console.WriteLine("3) Ändra systemuppgifter");
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("4) Radera");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("0) Avsluta applikationen");
 
                 applicationIsRunning = MenuSelection.Main();
@@ -54,16 +56,13 @@ namespace HotelRoomManager.Menus
             MenuSelection.Registration();
         }
 
-        public static void EditSystemDataMenu()
+        public static void UpdateSystemDataMenu()
         {
             Console.Clear();
             Console.WriteLine($"Ändra systemuppgifter{Environment.NewLine}");
             Console.WriteLine("1) Ändra rum");
             Console.WriteLine("2) Ändra kunduppgifter");
             Console.WriteLine("3) Ändra en bokning");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("4) Radera");
-            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("0) Gå tillbaka");
 
             MenuSelection.UpdateSystemData();
@@ -79,7 +78,7 @@ namespace HotelRoomManager.Menus
             Console.WriteLine($"=================== {Environment.NewLine}");
             Console.WriteLine("1) Radera rum");
             Console.WriteLine("2) Radera kund");
-            Console.WriteLine("3) Avbokning");
+            Console.WriteLine("3) Avboka");
             Console.WriteLine("0) Gå tillbaka");
 
 

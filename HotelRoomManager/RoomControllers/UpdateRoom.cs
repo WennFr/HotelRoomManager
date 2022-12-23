@@ -86,9 +86,9 @@ namespace HotelRoomManager.RoomControllers
                             }
                             break;
 
-                        case 0:
-                            dbContext.SaveChanges();
+                        case 0: 
                             Console.Clear();
+                            dbContext.SaveChanges();
                             Message.ChangesSaved();
                             Message.PressEnterToReturnToMenu();
                             isRunning = false;

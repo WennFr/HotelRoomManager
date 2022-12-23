@@ -69,6 +69,7 @@ namespace HotelRoomManager.CustomerControllers
                             customer.Phone = Console.ReadLine();
                             break;
                         case 0:
+                            Console.Clear();
                             dbContext.SaveChanges();
                             Message.ChangesSaved();
                             Message.PressEnterToReturnToMenu();

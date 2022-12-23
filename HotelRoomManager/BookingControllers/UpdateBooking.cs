@@ -38,7 +38,6 @@ namespace HotelRoomManager.BookingControllers
                 Message.PressEnterToReturnToMenu();
             }
 
-
             else
             {
                 var currentBooking = bookingController.ChooseBooking();
@@ -140,6 +139,7 @@ namespace HotelRoomManager.BookingControllers
 
 
                         case 0:
+                            Console.Clear();
                             dbContext.SaveChanges();
                             Message.ChangesSaved();
                             Message.PressEnterToReturnToMenu();

@@ -27,7 +27,7 @@ namespace HotelRoomManager.RoomControllers
                 var isCorrectRoomSize = false;
                 try
                 {
-                    Console.WriteLine($"{Environment.NewLine}Rumsvåning:");
+                    Console.WriteLine($"{Environment.NewLine}Rumsvåning (siffra):");
                     Console.Write(">");
                     var newRoomFloor = Console.ReadLine();
                     var newRoomType = roomController.ControlCorrectRoomType();

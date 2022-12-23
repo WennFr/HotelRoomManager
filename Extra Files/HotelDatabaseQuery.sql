@@ -67,3 +67,41 @@ FROM Customers c
 WHERE c.Id  in (SELECT b.CustomerId  FROM Bookings b)
 
 
+--=====CREATE DATABASE WITH SQL======================================================
+
+CREATE DATABASE FredericksHotelDatabase
+
+CREATE TABLE Salutations(
+
+Id int NOT NULL PRIMARY KEY,
+[SalutationType]  nvarchar(5) NOT NULL,
+);
+
+CREATE TABLE Customers(
+
+Id int NOT NULL PRIMARY KEY,
+[FirstName] nvarchar(50) NOT NULL,
+[LastName] nvarchar(50) NOT NULL,
+[Adress] int,
+[Phone] int NOT NULL,
+[SalutationId] int FOREIGN KEY REFERENCES Salutations(Id)
+);
+
+CREATE TABLE Bookings(
+
+Id int NOT NULL PRIMARY KEY,
+[StartDate] datetime NOT NULL,
+[EndDate] datetime NOT NULL,
+[CustomerId] int NOT NULL FOREIGN KEY REFERENCES Customers(Id),
+[RoomId] int NOT NULL FOREIGN KEY REFERENCES Rooms(Id)
+);
+
+CREATE TABLE Rooms(
+
+Id int NOT NULL PRIMARY KEY,
+[Floor] int NOT NULL,
+[Type] nvarchar(50) NOT NULL,
+[Size] int NOT NULL,
+[ExtraBed] int
+);
+

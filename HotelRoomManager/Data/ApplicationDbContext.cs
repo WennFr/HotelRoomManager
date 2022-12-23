@@ -15,7 +15,7 @@ namespace HotelRoomManager.Data
         public DbSet<Room> Rooms { get; set; }
         public ApplicationDbContext()
         {
-            //En tom konstruktor för migrations
+           
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

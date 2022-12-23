@@ -82,9 +82,18 @@ CREATE TABLE Customers(
 Id int NOT NULL PRIMARY KEY,
 [FirstName] nvarchar(50) NOT NULL,
 [LastName] nvarchar(50) NOT NULL,
-[Adress] int,
+[Adress] int NOT NULL,
 [Phone] int NOT NULL,
 [SalutationId] int FOREIGN KEY REFERENCES Salutations(Id)
+);
+
+CREATE TABLE Rooms(
+
+Id int NOT NULL PRIMARY KEY,
+[Floor] int NOT NULL,
+[Type] nvarchar(50) NOT NULL,
+[Size] int NOT NULL,
+[ExtraBed] int
 );
 
 CREATE TABLE Bookings(
@@ -96,12 +105,4 @@ Id int NOT NULL PRIMARY KEY,
 [RoomId] int NOT NULL FOREIGN KEY REFERENCES Rooms(Id)
 );
 
-CREATE TABLE Rooms(
-
-Id int NOT NULL PRIMARY KEY,
-[Floor] int NOT NULL,
-[Type] nvarchar(50) NOT NULL,
-[Size] int NOT NULL,
-[ExtraBed] int
-);
 

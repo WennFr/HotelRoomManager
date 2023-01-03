@@ -96,7 +96,9 @@ namespace HotelRoomManager.BookingControllers
 
                 Console.WriteLine($"{Environment.NewLine}Vill du bekräfta bokningen?");
                 Console.WriteLine("1) Bekräfta bokning");
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("0) Avbryt bokning");
+                Console.ForegroundColor = ConsoleColor.Gray;
 
                 selectionMenuLimit = 1;
                 selection = MenuSelection.ValidateSelection(selectionMenuLimit);
@@ -116,7 +118,10 @@ namespace HotelRoomManager.BookingControllers
                         break;
 
                     case 0:
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Bokningen är avbruten.");
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Message.PressEnterToReturnToMenu();
                         break;
                 }

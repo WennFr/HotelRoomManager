@@ -84,6 +84,19 @@ namespace HotelRoomManager.Messages
 
         }
 
+
+        public static void RoomIsBooked()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Rummet som har valts har en pågående bokning.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+
+        }
+
+
+
+
         public static void ChooseBetweenAvailableMenuNumbers()
         {
             Console.WriteLine("Välj mellan de angivna siffrorna i menyn");

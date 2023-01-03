@@ -39,11 +39,11 @@ namespace HotelRoomManager.RoomControllers
             else
             {
                 var roomToDelete = roomController.ChooseRoom();
-                var isCustomerBooked = roomController.CheckIfRoomIsBooked(roomToDelete);
+                var isRoomBooked = roomController.CheckIfRoomIsBooked(roomToDelete);
 
-                if (isCustomerBooked)
+                if (isRoomBooked)
                 {
-                    Message.CustomerIsBooked();
+                    Message.RoomIsBooked();
                     Message.PressEnterToReturnToMenu();
                 }
 

@@ -112,8 +112,9 @@ namespace HotelRoomManager.BookingControllers
         {
             if (availableRooms.Count() < 1)
             {
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n\n Det finns inga lediga rum på valt datum. Ändra datum eller antal gäster ");
+                Console.WriteLine("\n Det finns inga lediga rum på valt datum. Ändra datum eller antal gäster ");
                 Console.ForegroundColor = ConsoleColor.Gray;
 
                 return false;

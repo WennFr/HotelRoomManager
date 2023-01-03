@@ -117,9 +117,14 @@ namespace HotelRoomManager.BookingControllers
 
                             if (!isNewDateValid)
                             {
+                                Console.Clear();
                                 currentBooking.StartDate = backUpStartDate;
                                 currentBooking.EndDate = backUpEndDate;
+
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Rummet är bokat på dessa datum. Var god prova ett annat datum.");
+                                Console.ForegroundColor = ConsoleColor.Gray;
+
                                 Message.PressEnter();
                             }
                             else

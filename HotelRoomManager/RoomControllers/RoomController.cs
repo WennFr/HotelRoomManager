@@ -42,6 +42,13 @@ namespace HotelRoomManager.RoomControllers
                 Console.ForegroundColor = ConsoleColor.Gray;
                 return false;
             }
+            else if (roomSize > 50)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ett rum kan inte vara större än 50kvm.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                return false;
+            }
 
             return true;
         }
@@ -63,7 +70,7 @@ namespace HotelRoomManager.RoomControllers
         public Room ChooseRoom()
         {
             int intSelection;
-            Console.WriteLine($"Välj Id på rummet du vill selektera på:");
+            Console.WriteLine($"Välj Id på rummet du vill selektera:");
             while (true)
             {
                 Console.WriteLine(">");
@@ -88,7 +95,7 @@ namespace HotelRoomManager.RoomControllers
                 $"{room.Id}",
                 $"{room.Type}",
                 $"{room.Floor}",
-                $"{room.Size}",
+                $"{room.Size}kvm",
                 $"{room.ExtraBed}{Environment.NewLine}");
 
         }
@@ -100,14 +107,6 @@ namespace HotelRoomManager.RoomControllers
                     return true;
             return false;
         }
-
-
-
-
-
-
-
-
 
     }
 }

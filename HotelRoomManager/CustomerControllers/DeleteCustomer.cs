@@ -63,6 +63,7 @@ namespace HotelRoomManager.CustomerControllers
 
                         else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
                         {
+                            Console.Clear();
                             dbContext.Customers.Remove(customerToDelete);
                             dbContext.SaveChanges();
                             Console.WriteLine($"Kund raderad.{Environment.NewLine}");

@@ -10,8 +10,6 @@ namespace HotelRoomManager.Data
 {
     public class Room
     {
-        private RoomType roomType;
-
         [Key]
         public int Id { get; set; }
         [Required]

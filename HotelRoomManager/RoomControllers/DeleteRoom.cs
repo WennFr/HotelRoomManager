@@ -64,6 +64,7 @@ namespace HotelRoomManager.RoomControllers
 
                         else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
                         {
+                            Console.Clear();
                             dbContext.Rooms.Remove(roomToDelete);
                             dbContext.SaveChanges();
                             Console.WriteLine($"Rum raderat.{Environment.NewLine}");

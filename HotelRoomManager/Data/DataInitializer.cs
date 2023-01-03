@@ -53,9 +53,8 @@ public class DataInitializer
     public void SeedCustomers()
     {
         var customerController = new CustomerController(dbContext);
-        if (!dbContext.Customers.Any(s => s.FirstName == "Lars" && s.LastName == "Johansson"))
+        if (!dbContext.Customers.Any())
         {
-           
             dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Lars",
@@ -63,13 +62,8 @@ public class DataInitializer
                 Address = "Torsgatan 7",
                 Phone = "+46-222238934",
                 Salutation = customerController.GetMaleSalutation()
-                
+
             });
-
-        }
-
-        if (!dbContext.Customers.Any(s => s.FirstName == "Maya" && s.LastName == "Schulz"))
-        {
             dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Maya",
@@ -78,10 +72,6 @@ public class DataInitializer
                 Phone = "+49-111555350",
                 Salutation = customerController.GetFemaleSalutation()
             });
-        }
-
-        if (!dbContext.Customers.Any(s => s.FirstName == "Rowan" && s.LastName == "Wilson"))
-        {
             dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Rowan",
@@ -90,11 +80,6 @@ public class DataInitializer
                 Phone = "+44-333623339",
                 Salutation = customerController.GetMaleSalutation()
             });
-
-        }
-
-        if (!dbContext.Customers.Any(s => s.FirstName == "Hannah" && s.LastName == "Dahlberg"))
-        {
             dbContext.Customers.Add(new Customer()
             {
                 FirstName = "Hannah",
@@ -103,7 +88,6 @@ public class DataInitializer
                 Phone = "+46-777555359",
                 Salutation = customerController.GetFemaleSalutation()
             });
-
         }
     }
     public void SeedRooms()
@@ -111,7 +95,7 @@ public class DataInitializer
         var roomController = new RoomController(dbContext);
         var room = new Room();
 
-        if (!dbContext.Rooms.Any(r => r.Type == "Single"))
+        if (!dbContext.Rooms.Any())
         {
             dbContext.Rooms.Add(new Room
             {
@@ -121,10 +105,7 @@ public class DataInitializer
                 ExtraBed = 0
 
             });
-        }
 
-        if (!dbContext.Rooms.Any(r => r.Type == "Double"))
-        {
             dbContext.Rooms.Add(new Room
             {
                 Floor = 2,
@@ -133,10 +114,7 @@ public class DataInitializer
                 ExtraBed = 1
 
             });
-        }
 
-        if (!dbContext.Rooms.Any(r => r.Type == "Single"))
-        {
             dbContext.Rooms.Add(new Room
             {
                 Floor = 2,
@@ -145,18 +123,18 @@ public class DataInitializer
                 ExtraBed = 0
 
             });
-        }
 
-        if (!dbContext.Rooms.Any(r => r.Type == "Double"))
-        {
-            dbContext.Rooms.Add( new Room
+            dbContext.Rooms.Add(new Room
             {
                 Floor = 1,
                 Type = "Double",
                 Size = 35,
                 ExtraBed = 2
             });
+
         }
+
+
     }
 
 }

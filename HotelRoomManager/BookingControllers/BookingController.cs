@@ -211,5 +211,21 @@ namespace HotelRoomManager.BookingControllers
             return true;
         }
 
+        public void DisplayChosenBooking(Booking booking)
+        {
+            Console.WriteLine("{0,-17} {1,-15} {2,-20} {3,-20}{4,-20} {5,-20} ", $"{Environment.NewLine}BookningsID", "Från", "Till", "Kund","RumID",$"Rumstyp{Environment.NewLine}");
+            Console.WriteLine("{0,-15} {1,-15} {2,-20} {3,-20}{4,-20} {5,-20} ",
+                $"{booking.Id}",
+                $"{booking.StartDate.ToShortDateString()}",
+                $"{booking.EndDate.ToShortDateString()}",
+                $"{booking.Customer.Salutation.SalutationType}{booking.Customer.LastName}",
+                $"{booking.Room.Id}", 
+                $"{booking.Room.Type}{Environment.NewLine}");
+
+        }
+        
+
+
+
     }
 }

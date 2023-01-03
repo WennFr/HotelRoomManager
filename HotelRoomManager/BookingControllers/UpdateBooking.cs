@@ -45,12 +45,8 @@ namespace HotelRoomManager.BookingControllers
                 while (isRunning)
                 {
                     Console.Clear();
-                    Console.WriteLine(
-                        $"{Environment.NewLine}BokningsID\tFrån\t\tTill\t\tKund\t\tRum {Environment.NewLine}");
-                    Console.WriteLine(
-                        $"{currentBooking.Id}\t\t{currentBooking.StartDate.ToShortDateString()}\t{currentBooking.EndDate.ToShortDateString()} " +
-                        $"\t{currentBooking.Customer.Salutation.SalutationType}{currentBooking.Customer.LastName}\t{currentBooking.Room.Id}");
-                    Console.WriteLine($"{Environment.NewLine}Vad vill du ändra? {Environment.NewLine}");
+                    bookingController.DisplayChosenBooking(currentBooking);
+
                     Menu.UpdateBookingSelectionMenu();
 
                     var selectionMenuLimit = 3;

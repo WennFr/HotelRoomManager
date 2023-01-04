@@ -56,11 +56,13 @@ namespace HotelRoomManager.BookingControllers
 
                     if (selection.ToLower() == "n" || selection.ToLower() == "no")
                     {
+                        Console.Clear();
                         Message.PressEnterToReturnToMenu();
                         break;
                     }
                     else if (selection.ToLower() == "y" || selection.ToLower() == "yes")
                     {
+                        Console.Clear();
                         dbContext.Bookings.Remove(bookingToDelete);
                         dbContext.SaveChanges();
                         Console.WriteLine($"{Environment.NewLine}Bokning borttagen.{Environment.NewLine}");
